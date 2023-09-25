@@ -1,0 +1,47 @@
+body {
+  background-color: #333;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+h1 {
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin-top: 5vh;
+}
+h2 {
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin-top: 10vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 10vh;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+}
+
+select, button {
+  margin: 10px;
+  padding: 10px;
+  background-color: #047d7d;
+  border: none;
+  color: #fff;
+}
+
+#hints {
+  color: #047d7d;
+  width: 60vw;
+}

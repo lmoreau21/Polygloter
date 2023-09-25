@@ -1,0 +1,44 @@
+{
+    "English": {
+        "hint1": "Number of native speakers: Approximately 380 million",
+        "hint2": "Language Family: Indo-European",
+        "hint3": "Famous Speakers: Winston Churchill, Martin Luther King, Mahatma Gandhi",
+        "hint4": "Countries where it's spoken: United States, the United Kingdom, Canada, Australia, Ireland, and New Zealand"
+    },
+    "Chinese": {
+        "hint1": "Number of native speakers: Approximately 918 million",
+        "hint2": "Language Family: Sino-Tibetan",
+        "hint3": "Famous Speakers: Confucius, Laozi, Xi Jinping",
+        "hint4": "Countries where it's spoken: China"
+    },
+    "French": {
+        "hint1": "Number of native speakers: Approximately 80.8 million",
+        "hint2": "Language Family: Indo-European",
+        "hint3": "Famous Speakers: Victor Hugo, Voltaire, Napoleon Bonaparte",
+        "hint4": "Countries where it's spoken: France"
+    },
+    "Spanish": {
+        "hint1": "Number of native speakers: Approximately 483 million",
+        "hint2": "Language Family: Indo-European",
+        "hint3": "Famous Speakers: Gabriel Garcia Marquez, Pablo Picasso, Lionel Messi",
+        "hint4": "Countries where it's spoken: Spain"
+    },
+    "Japanese": {
+        "hint1": "Number of native speakers: Over 126 million",
+        "hint2": "Language Family: Japonic",
+        "hint3": "",
+        "hint4": "Countries where it's spoken: Japan"
+    },
+    "Italian": {
+        "hint1": "Number of native speakers: Approximately 63 million",
+        "hint2": "",
+        "hint3": "Famous Speakers: Catholic Pope",
+        "hint4": "Countries where it's spoken: Italy, San Marino, Switzerland, and Vatican City"
+    },
+    "Russian": {
+        "hint1": "Number of native speakers: Approximately 147 million",
+        "hint2": "",
+        "hint3": "",
+        "hint4": "Countries where it's spoken: Russia"
+    }
+}
