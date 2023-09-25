@@ -4,41 +4,50 @@ import languages from './languages.json';
 function Dropdown() {
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [hints, setHints] = useState([]);
-    const [round, setRound] = useState(0);
+    const [round, setRound] = useState(1);
     const [gameOver, setGameOver] = useState(false);
-    const phrases = 'Good morning!'; 
-    const correctLanguage = 'English'; // replace with the correct language
-    const hintsForLanguages = languages; // replace with your hints object
+    const [lang_counter, setLangCounter] = useState(0); 
+
+    const phrases = 'How are you doing?';
+    const correctLanguage = ['French','Chinese']; 
+    const placeholder_phrase = ['Comment allez-vous','你好吗'];
+    const hintsForLanguages = languages; 
 
     useEffect(() => {
         if (gameOver) {
-            alert(`Congratulations! You've guessed the correct language: ${correctLanguage}`);
+            alert(`Congratulations! You've guessed the correct language: ${correctLanguage[lang_counter]}`);
         } else if (round >= 5) {
-            alert(`Failed! The correct language: ${correctLanguage}`);
+            alert(`Failed! The correct language: ${correctLanguage[lang_counter]}`);
         }
     }, [gameOver, round]);
 
     useEffect(() => {
         const selectButton = document.getElementById('select-button');
         const handleSelectButtonClick = () => {
-            if (!gameOver && selectedLanguage !== correctLanguage && round < 5) {
+            if (!gameOver && selectedLanguage !== correctLanguage[lang_counter] && round < 5) {
                 if (round === 0) {
                     setHints(hints.concat(`Guess: ${selectedLanguage}, Hint: Phrase in English: ${phrases}`));
                 } else {
-                    setHints(hints.concat(`Guess: ${selectedLanguage}, Hint: ${hintsForLanguages[correctLanguage][`hint${round}`]}`));
+                    setHints(hints.concat(`Guess: ${selectedLanguage}, Hint: ${hintsForLanguages[correctLanguage[lang_counter]][`hint${round}`]}`));
                 }
                 setRound(round + 1);
-            } else if (selectedLanguage === correctLanguage) {
+            } else if (selectedLanguage === correctLanguage[lang_counter]) {
                 setGameOver(true);
             }
         };
         selectButton.addEventListener('click', handleSelectButtonClick);
-
-        // Cleanup function to remove the event listener
-        return () => {
-            selectButton.removeEventListener('click', handleSelectButtonClick);
+        return () => { 
+            selectButton.removeEventListener('click', handleSelectButtonClick); 
         };
-    }, [selectedLanguage, round, hints, gameOver]);
+    }, [selectedLanguage, gameOver, round]);
+
+    // Add this function
+    const handleStartOverClick = () => {
+        setRound(1);
+        setHints([])
+        setGameOver(false);
+        setLangCounter((lang_counter + 1) % correctLanguage.length);
+    };
 
     const handleChange = (event) => {
         setSelectedLanguage(event.target.value);
@@ -46,7 +55,7 @@ function Dropdown() {
 
     return (
         <div className="App">
-            <h2>{phrases}</h2>
+            <h2>{placeholder_phrase[lang_counter]}</h2>
             <div className="controls">
                 <select id="language-select" value={selectedLanguage} onChange={handleChange}>
                     <option value="">Choose a language</option>
@@ -64,8 +73,9 @@ function Dropdown() {
                 ))}
             </div>
             <p>Round: {round}</p>
+            
             {(gameOver || round >= 5) && (
-                <button onClick={() => window.location.reload()}>Start Over</button>
+                <button onClick={handleStartOverClick}>Start Over</button> 
             )}
         </div>
     );

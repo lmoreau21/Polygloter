@@ -44,4 +44,5 @@ select, button {
 #hints {
   color: #047d7d;
   width: 60vw;
+  align-items: center;
 }
