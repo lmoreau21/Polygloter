@@ -1,5 +1,5 @@
 # Polygloter
-Link: 
+Link: https://lmoreau21.github.io/Polygloter/
 
 ## Decriptions
 Language guesing website given a certain phrase
@@ -20,6 +20,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run deploy`
+
+Pushes the local version to github pages
 
 ### `npm start`
 
