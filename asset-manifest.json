@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Polygloter/static/css/main.2f8cbc31.css",
+    "main.js": "/Polygloter/static/js/main.72b9ce88.js",
+    "index.html": "/Polygloter/index.html",
+    "main.2f8cbc31.css.map": "/Polygloter/static/css/main.2f8cbc31.css.map",
+    "main.72b9ce88.js.map": "/Polygloter/static/js/main.72b9ce88.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2f8cbc31.css",
+    "static/js/main.72b9ce88.js"
+  ]
+}
