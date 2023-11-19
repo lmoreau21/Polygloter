@@ -4,12 +4,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
+import { Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../custom-styles.css';
 import { ChevronLeft } from 'react-feather';
 import languageData from '../languages.json';
 import Select from 'react-select';
-import { Hidden } from '@mui/material';
 
 function DailyChallenge() {
   // State for the current language challenge
@@ -21,6 +21,25 @@ function DailyChallenge() {
   const [round, setRound] = useState(1);
   const [gameOver, setGameOver] = useState(false);
   const [guessedLanguages, setGuessedLanguages] = useState(new Set());
+  const [lastAttemptDate, setLastAttemptDate] = useState(localStorage.getItem('lastAttemptDate') || '');
+  const [attemptCount, setAttemptCount] = useState(parseInt(localStorage.getItem('attemptCount')) || 0);
+  const [showModal, setShowModal] = useState(false);
+  const [record, setRecord] = useState('');
+  useEffect(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    if (lastAttemptDate !== today) {
+      setAttemptCount(0); // Reset attempt count if it's a new day
+      setLastAttemptDate(today);
+      localStorage.setItem('lastAttemptDate', today);
+      localStorage.setItem('attemptCount', '0');
+      selectDailyChallenge();
+    }
+  }, []);
+  const selectDailyChallenge = () => {
+    const today = new Date();
+    const index = (today.getFullYear() + today.getMonth() + today.getDate()) % languageData.length;
+    setCurrentChallenge(languageData[index]);
+  };
 
   // Function to start a new game or round
   const startNewGame = () => {
@@ -37,6 +56,11 @@ function DailyChallenge() {
   useEffect(startNewGame, []);
 
   const handleSelectButtonClick = () => {
+    if (attemptCount >= 1) {
+      alert("You have already made your attempt for today.");
+      return;
+    }
+
     if (guessedLanguages.has(selectedLanguage)) {
       alert("You have already guessed this language.");
       return;
@@ -71,6 +95,11 @@ function DailyChallenge() {
       setHints([...hints, `${selectedLanguage}, Correct Answer`]);
       setSelectedLanguage(''); 
     }
+    if(gameOver){
+      setAttemptCount(attemptCount + 1);
+      localStorage.setItem('attemptCount', (attemptCount + 1).toString());
+    }
+    
   };
     
   const sortedLanguages = Object.keys(languages).sort().map(language => ({
@@ -78,18 +107,6 @@ function DailyChallenge() {
     label: language
   }));
 
-
-  const handleStartOverClick = () => {
-    setRound(1);
-    setHints([]);
-    setGameOver(false);
-    setGuessedLanguages(new Set());
-    setLangCounter((prevLangCounter) => (prevLangCounter + 1) % correctLanguage.length);
-  };
-
-  const handleChange = (event) => {
-    setSelectedLanguage(event.target.value);
-  }
   return (
     <div style={{ backgroundColor:'#262d4c', height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column'}}>
     <Navbar expand="lg" variant="dark">
@@ -112,12 +129,12 @@ function DailyChallenge() {
       </div>
     </Navbar>
 
-    <div className="quiz dark-mode" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width:'100%', overflow:'hidden'}}>
+    <div className="quiz dark-mode" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: 40, alignItems: 'center', width:'100%', overflow:'hidden'}}>
       <div className="content text-center">
         <h1 className="display-1">{currentChallenge.phrase}</h1>
         <h3 className="mb-4">Round: {round}/6</h3>
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Accordion style={{ width: '80%' }}>
+        <Accordion alwaysOpen style={{ width: '80%' }}>
           {hints.map((hint, index) => {
             const isCorrectAnswer = hint.includes('Correct Answer');
             return (
@@ -175,7 +192,7 @@ function DailyChallenge() {
               }),
               menuList: (provided) => ({
                 ...provided,
-                maxHeight: '200px', // Limit the height of the dropdown list
+                maxHeight: '250px', // Limit the height of the dropdown list
                 overflowY: 'auto',  // Enable scrolling inside the dropdown list
               }),
               menu: (provided) => ({

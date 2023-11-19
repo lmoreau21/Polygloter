@@ -102,6 +102,8 @@
 body, html {
   margin: 0;
   padding: 0;
+
+ 
   /* Other styles like font-family can be here */
 }
 .navbar {
@@ -110,9 +112,10 @@ body, html {
   
   /* Style for the main large text */
   .display-1 {
-    font-size: 4rem; /* Larger font size for main phrase */
+    font-size: 3rem; /* Larger font size for main phrase */
     color: white; /* White color text */
-    margin-bottom: 1rem; /* Space below the phrase */  
+    padding-bottom: .4rem;
+    /* Space below the phrase */  
   
   }
   
@@ -141,10 +144,10 @@ body, html {
 
   /* Remove default accordion padding to ensure elements are flush */
   .accordion-body {
-    padding: 10;
+    padding: 2px;
   
   }
-  
+
   
   /* Remove rounded corners from first and last child of accordion for flush appearance */
   .accordion-item:first-of-type .accordion-button {
@@ -169,6 +172,7 @@ body, html {
 
 /* Align the dropdown and button container */
 .quiz .form-group {
+  color: white;
   width: 80%; /* Adjust based on your layout */
   display: flex;
   justify-content: center; /* Center align */
@@ -192,6 +196,7 @@ body, html {
 
 /* Ensure that the accordion and form have the same width */
 .quiz .accordion, .quiz .form {
+  color: white !important;
   width: 80%; /* Adjust as needed */
   margin: 0 auto; /* Center align */
 }
@@ -205,6 +210,9 @@ body, html {
 .accordion-button, .accordion-body {
   background-color: rgba(92, 103, 153, 0.5); /* Button color */
   color: white !important;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .accordion-button:not(.collapsed) {
