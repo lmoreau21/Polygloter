@@ -1,44 +1,148 @@
-{
-    "English": {
-        "hint1": "Number of native speakers: Approximately 380 million",
-        "hint2": "Language Family: Indo-European",
-        "hint3": "Famous Speakers: Winston Churchill, Martin Luther King, Mahatma Gandhi",
-        "hint4": "Countries where it's spoken: United States, the United Kingdom, Canada, Australia, Ireland, and New Zealand"
+[
+    {
+      "name": "French",
+      "phrase": "Comment allez-vous",
+      "englishPhrase": "How are you doing?"
     },
-    "Chinese": {
-        "hint1": "Number of native speakers: Approximately 918 million",
-        "hint2": "Language Family: Sino-Tibetan",
-        "hint3": "Famous Speakers: Confucius, Laozi, Xi Jinping",
-        "hint4": "Countries where it's spoken: China"
+    {
+        "name": "Mandarin Chinese",
+        "phrase": "这个多少钱？",
+        "englishPhrase": "How much does this cost?"
     },
-    "French": {
-        "hint1": "Number of native speakers: Approximately 80.8 million",
-        "hint2": "Language Family: Indo-European",
-        "hint3": "Famous Speakers: Victor Hugo, Voltaire, Napoleon Bonaparte",
-        "hint4": "Countries where it's spoken: France"
+    {
+        "name": "Spanish",
+        "phrase": "Muchas gracias.",
+        "englishPhrase": "Thank you so much."
     },
-    "Spanish": {
-        "hint1": "Number of native speakers: Approximately 483 million",
-        "hint2": "Language Family: Indo-European",
-        "hint3": "Famous Speakers: Gabriel Garcia Marquez, Pablo Picasso, Lionel Messi",
-        "hint4": "Countries where it's spoken: Spain"
+    {
+        "name": "Hindi",
+        "phrase": "आज मौसम बहुत सुहावना है।",
+        "englishPhrase": "The weather is very pleasant today."
     },
-    "Japanese": {
-        "hint1": "Number of native speakers: Over 126 million",
-        "hint2": "Language Family: Japonic",
-        "hint3": "",
-        "hint4": "Countries where it's spoken: Japan"
+    {
+        "name": "Bengali",
+        "phrase": "আপনি কেমন আছেন?",
+        "englishPhrase": "How are you?"
     },
-    "Italian": {
-        "hint1": "Number of native speakers: Approximately 63 million",
-        "hint2": "",
-        "hint3": "Famous Speakers: Catholic Pope",
-        "hint4": "Countries where it's spoken: Italy, San Marino, Switzerland, and Vatican City"
+    {
+        "name": "Portuguese",
+        "phrase": "Que horas são?",
+        "englishPhrase": "What time is it?"
     },
-    "Russian": {
-        "hint1": "Number of native speakers: Approximately 147 million",
-        "hint2": "",
-        "hint3": "",
-        "hint4": "Countries where it's spoken: Russia"
+    {
+        "name": "Russian",
+        "phrase": "Где находится ближайший банк?",
+        "englishPhrase": "Where is the nearest bank?"
+    },
+    {
+        "name": "Japanese",
+        "phrase": "トイレはどこですか？",
+        "englishPhrase": "Where is the toilet?"
+    },
+    {
+        "name": "Turkish",
+        "phrase": "Bir kahve lütfen.",
+        "englishPhrase": "A coffee, please."
+    },
+    {
+        "name": "Korean",
+        "phrase": "이거 얼마예요?",
+        "englishPhrase": "How much is this?"
+    },
+    {
+        "name": "French",
+        "phrase": "Pouvez-vous m'aider?",
+        "englishPhrase": "Can you help me?"
+    },
+    {
+        "name": "German",
+        "phrase": "Ein Bier, bitte.",
+        "englishPhrase": "One beer, please."
+    },
+    {
+        "name": "Vietnamese",
+        "phrase": "Bạn tên là gì?",
+        "englishPhrase": "What is your name?"
+    },
+    {
+        "name": "Italian",
+        "phrase": "Dov'è la stazione?",
+        "englishPhrase": "Where is the station?"
+    },
+    {
+        "name": "Polish",
+        "phrase": "Jak się masz?",
+        "englishPhrase": "How are you?"
+    },
+    {
+        "name": "Ukrainian",
+        "phrase": "Скільки це коштує?",
+        "englishPhrase": "How much does it cost?"
+    },
+    {
+        "name": "Dutch",
+        "phrase": "Het is mooi weer vandaag.",
+        "englishPhrase": "It's nice weather today."
+    },
+    {
+        "name": "Arabic",
+        "phrase": "كيف حالك؟",
+        "englishPhrase": "How are you?"
+    },
+    {
+        "name": "Thai",
+        "phrase": "คุณชื่ออะไร?",
+        "englishPhrase": "What's your name?"
+    },
+    {
+        "name": "Greek",
+        "phrase": "Πού είναι η τουαλέτα;",
+        "englishPhrase": "Where is the toilet?"
+    },
+    {
+        "name": "Czech",
+        "phrase": "Můžete mi pomoci?",
+        "englishPhrase": "Can you help me?"
+    },
+    {
+        "name": "Swedish",
+        "phrase": "En kopp kaffe, tack.",
+        "englishPhrase": "A cup of coffee, please."
+    },
+    {
+        "name": "Finnish",
+        "phrase": "Mikä aika on?",
+        "englishPhrase": "What time is it?"
+    },
+    {
+        "name": "Danish",
+        "phrase": "Hvor meget koster det?",
+        "englishPhrase": "How much does it cost?"
+    },
+    {
+        "name": "Norwegian",
+        "phrase": "Hva heter du?",
+        "englishPhrase": "What is your name?"
+    },
+    {
+        "name": "Hungarian",
+        "phrase": "Szép idő van ma.",
+        "englishPhrase": "Beautiful weather today."
+    },
+    {
+        "name": "Hebrew",
+        "phrase": "איפה השירותים?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Indonesian",
+        "phrase": "Terima kasih banyak.",
+        "englishPhrase": "Thank you very much."
+    },
+    {
+        "name": "Romanian",
+        "phrase": "Cât costă asta?",
+        "englishPhrase": "How much does this cost?"
     }
-}
+]
+  

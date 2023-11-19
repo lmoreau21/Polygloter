@@ -1,0 +1,225 @@
+/* Importing Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap");
+/* Home background and styling */
+.home {
+  background: url('/public/map.svg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #262d4c;
+  font-family: 'Open Sans', 'Playfair Display';
+}
+.quiz {
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #262d4c;
+    font-family: 'Open Sans', 'Playfair Display';
+  }
+/* Content styling */
+.content {
+  width: '80%'; /* Adjust width as needed */
+
+  font-family: 'Playfair Display';
+}
+.navbar{
+    display: flex;
+    padding-left: 20px;
+    
+    font-family: 'Playfair Display';
+    font-size: 15;
+    color: #fff;
+}
+/* Button container and button styling */
+.button-container .btn {
+  margin-top: 10px;
+  border: 2px solid transparent;
+  font-family: 'Open Sans';
+}
+
+.button-container .btn:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-color: #5c6799;
+  font-family: 'Open Sans';
+}
+/* Override the focus style for buttons */
+.button-container .btn:focus, .btn-primary:active {
+    box-shadow: none; /* Removes the Bootstrap default focus shadow */
+    background-color: rgba(92, 103, 153, 0.5); /* Keeps the background color consistent */
+    border-color: #fff; /* Keeps the border color consistent */
+  }
+  
+/* Dark mode styling */
+.dark-mode {
+  background-color: #262d4c; /* Dark background color */
+  color: #fff; /* Light text color */
+}
+
+.dark-mode .content {
+  width: 80%;
+  color: #fff; /* White text in dark mode */
+}
+
+.dark-mode .button-container .btn {
+  color: white; /* White text on buttons in dark mode */
+}
+
+.dark-mode .button-container .btn:hover {
+  color: darkgray; /* Dark gray text on buttons in dark mode */
+}
+
+/* Modal content styling */
+.modal-content {
+  background-color: #262d4c; 
+ /* Modal background in dark mode */
+}
+
+.light-mode .modal-content {
+  background-color: #b5bad0; /* Lighter shade for modal background in light mode */
+}
+
+/* Bootstrap primary button color override */
+.btn-primary, .btn-primary:disabled {
+  background-color: rgba(92, 103, 153, 0.5); /* Primary button color */
+  border-color: #fff; /* Primary button border */
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #ffa28b7f; /* Primary button hover color */
+  border-color: #fff; /* Primary button border on hover */
+}
+
+/* Adjustments to your existing CSS */
+
+/* Navbar adjustments */
+body, html {
+  margin: 0;
+  padding: 0;
+  /* Other styles like font-family can be here */
+}
+.navbar {
+    padding-top: 1rem; /* Adjust spacing at the top */
+  }
+  
+  /* Style for the main large text */
+  .display-1 {
+    font-size: 4rem; /* Larger font size for main phrase */
+    color: white; /* White color text */
+    margin-bottom: 1rem; /* Space below the phrase */  
+  
+  }
+  
+  .home .btn-primary {
+    margin-left: 1rem; /* Add space between the select and the button */
+  }
+  
+  /* Style for the accordion to match your design */
+ 
+  .accordion-button:hover {
+    background-color: #ffa28b7f; /* Slightly more transparency on hover */
+  }
+  
+  .accordion-button:focus, 
+  .accordion-button:active  {
+    box-shadow: none; /* Remove focus outline */
+    background-color: #ffa28b7f;
+
+  }
+  /* Custom Accordion Chevron Style */
+.accordion-button::after {
+  /* Use a filter to change the SVG color */
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(360deg) brightness(103%) contrast(103%);
+}
+
+
+  /* Remove default accordion padding to ensure elements are flush */
+  .accordion-body {
+    padding: 10;
+  
+  }
+  
+  
+  /* Remove rounded corners from first and last child of accordion for flush appearance */
+  .accordion-item:first-of-type .accordion-button {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    color: white;
+  }
+  
+  .accordion-item:last-of-type {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: white;
+  }
+  
+  /* Adjust the button focus state to maintain the color consistency */
+  .quiz .btn-primary:focus, .btn-primary:active, .btn-primary:not(:disabled):not(.disabled).active, .show>.btn-primary.dropdown-toggle {
+    background-color: rgba(92, 103, 153, 0.8); /* Maintain the hover color */
+    border-color: #fff; /* Maintain the border color */
+    box-shadow: none; /* Remove focus shadow */
+  }
+  
+
+/* Align the dropdown and button container */
+.quiz .form-group {
+  width: 80%; /* Adjust based on your layout */
+  display: flex;
+  justify-content: center; /* Center align */
+  align-items: center;
+}
+
+/* Style the submit button */
+.quiz .btn-primary {
+  margin-left: 1rem; /* Space between dropdown and button */
+  background-color: rgba(92, 103, 153, 0.5); /* Button color */
+  border-color: #fff; /* Button border */
+  font-family: 'Open Sans', sans-serif; /* Apply your custom font */
+}
+
+/* Button hover and focus states */
+.quiz .btn-primary:hover,
+.quiz .btn-primary:focus {
+  background-color: #ffa28b7f; /* Hover and focus color */
+  border-color: #fff;
+}
+
+/* Ensure that the accordion and form have the same width */
+.quiz .accordion, .quiz .form {
+  width: 80%; /* Adjust as needed */
+  margin: 0 auto; /* Center align */
+}
+
+/* Accordion item styles */
+.accordion-item {
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+  color: white; /* White text */
+}
+
+.accordion-button, .accordion-body {
+  background-color: rgba(92, 103, 153, 0.5); /* Button color */
+  color: white !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #ffa28b7f; /* Expanded state color */
+  color: white;
+}
+.react-select__menu-notice--no-options {
+  color: white !important;
+}
+  
+  /* If you want the submit and select to be on the same line at all times */
+  @media (min-width: 576px) {
+    .quiz .d-flex {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+  

@@ -1,30 +1,43 @@
 {
-  "homepage": "https://lmoreau21.github.io/Polygloter",
   "name": "polygloter",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.4",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^16.11.14",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "bootstrap": "^5.3.2",
+    "bootstrap-icons": "^1.11.1",
+    "bootstrap-switch-button-react": "^1.2.0",
+    "feather-icons": "^4.29.1",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1",
+    "react-feather": "^2.0.10",
+    "react-flex": "^2.2.8",
+    "react-icons": "^4.12.0",
+    "react-modal": "^3.16.1",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
+    "reactjs-popup": "^2.0.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "root": true
   },
   "browserslist": {
     "production": [
@@ -37,8 +50,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^6.0.0"
   }
 }

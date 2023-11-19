@@ -1,0 +1,517 @@
+{
+    "English": {
+      "hint1": "Number of native speakers: Approximately 380 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: William Shakespeare, Barack Obama, J.K. Rowling",
+      "hint4": [
+        {
+          "country": "United States",
+          "percent": 95
+        },
+        {
+          "country": "United Kingdom",
+          "percent": 98
+        },
+        {
+          "country": "Canada",
+          "percent": 59
+        },
+        {
+          "country": "Australia",
+          "percent": 97
+        },
+        {
+          "country": "Ireland",
+          "percent": 97
+        },
+        {
+          "country": "New Zealand",
+          "percent": 96
+        }
+      ]
+    },
+    "Mandarin Chinese": {
+      "hint1": "Number of native speakers: Approximately 918 million",
+      "hint2": "Language Family: Sino-Tibetan",
+      "hint3": "Famous Speakers: Xi Jinping, Jack Ma, Jet Li",
+      "hint4": [
+        {
+          "country": "China",
+          "percent": 70
+        },
+        {
+          "country": "Singapore",
+          "percent": 36
+        }
+      ]
+    },
+    "Spanish": {
+      "hint1": "Number of native speakers: Approximately 460 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Gabriel Garcia Marquez, Frida Kahlo, Lionel Messi",
+      "hint4": [
+        {
+          "country": "Spain",
+          "percent": 99
+        },
+        {
+          "country": "Mexico",
+          "percent": 98
+        },
+        {
+          "country": "Colombia",
+          "percent": 99
+        },
+        {
+          "country": "Argentina",
+          "percent": 97
+        },
+        {
+          "country": "Peru",
+          "percent": 84
+        },
+        {
+          "country": "Venezuela",
+          "percent": 96
+        },
+        {
+          "country": "Chile",
+          "percent": 99
+        },
+        {
+          "country": "Ecuador",
+          "percent": 93
+        },
+        {
+          "country": "Guatemala",
+          "percent": 69
+        },
+        {
+          "country": "Cuba",
+          "percent": 95
+        }
+      ]
+    },
+    "French": {
+      "hint1": "Number of native speakers: Approximately 80 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Napoleon Bonaparte, Victor Hugo, Voltaire",
+      "hint4": [
+        {
+          "country": "France",
+          "percent": 88
+        },
+        {
+          "country": "Canada",
+          "percent": 22
+        },
+        {
+          "country": "Belgium",
+          "percent": 45
+        },
+        {
+          "country": "Switzerland",
+          "percent": 20
+        },
+        {
+          "country": "Haiti",
+          "percent": 42
+        },
+        {
+          "country": "Cameroon",
+          "percent": 31
+        }
+      ]
+    },
+    "Hindi": {
+      "hint1": "Number of native speakers: Approximately 341 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Amitabh Bachchan, Narendra Modi, Ravi Shankar",
+      "hint4": [
+        {
+          "country": "India",
+          "percent": 41
+        }
+      ]
+    },
+    "Bengali": {
+      "hint1": "Number of native speakers: Approximately 230 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Rabindranath Tagore, Sheikh Mujibur Rahman",
+      "hint4": [
+        {
+          "country": "Bangladesh",
+          "percent": 98
+        },
+        {
+          "country": "India",
+          "percent": 9
+        }
+      ]
+    },
+    "Portuguese": {
+      "hint1": "Number of native speakers: Approximately 221 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Cristiano Ronaldo, Paulo Coelho, Pele",
+      "hint4": [
+        {
+          "country": "Brazil",
+          "percent": 98
+        },
+        {
+          "country": "Portugal",
+          "percent": 96
+        },
+        {
+          "country": "Angola",
+          "percent": 71
+        },
+        {
+          "country": "Mozambique",
+          "percent": 40
+        }
+      ]
+    },
+    "Russian": {
+      "hint1": "Number of native speakers: Approximately 150 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Leo Tolstoy, Fyodor Dostoevsky, Vladimir Putin",
+      "hint4": [
+        {
+          "country": "Russia",
+          "percent": 99
+        },
+        {
+          "country": "Belarus",
+          "percent": 70
+        },
+        {
+          "country": "Kazakhstan",
+          "percent": 21
+        },
+        {
+          "country": "Latvia",
+          "percent": 37
+        }
+      ]
+    },
+    "Japanese": {
+      "hint1": "Number of native speakers: Over 126 million",
+      "hint2": "Language Family: Japonic",
+      "hint3": "Famous Speakers: Haruki Murakami, Hayao Miyazaki, Shinzo Abe",
+      "hint4": [
+        {
+          "country": "Japan",
+          "percent": 99
+        }
+      ]
+    },
+    "Turkish": {
+      "hint1": "Number of native speakers: Approximately 75 million",
+      "hint2": "Language Family: Turkic",
+      "hint3": "Famous Speakers: Mustafa Kemal Atatürk, Orhan Pamuk",
+      "hint4": [
+        {
+          "country": "Turkey",
+          "percent": 90
+        },
+        {
+          "country": "Cyprus",
+          "percent": 18
+        }
+      ]
+    },
+    "Korean": {
+      "hint1": "Number of native speakers: Approximately 77 million",
+      "hint2": "Language Family: Koreanic",
+      "hint3": "Famous Speakers: Kim Jong-un, Ban Ki-moon",
+      "hint4": [
+        {
+          "country": "South Korea",
+          "percent": 99
+        },
+        {
+          "country": "North Korea",
+          "percent": 99
+        }
+      ]
+    },
+    "Vietnamese": {
+      "hint1": "Number of native speakers: Approximately 76 million",
+      "hint2": "Language Family: Austroasiatic",
+      "hint3": "Famous Speakers: Ho Chi Minh, Phan Bội Châu",
+      "hint4": [
+        {
+          "country": "Vietnam",
+          "percent": 97
+        }
+      ]
+    },
+    "Italian": {
+      "hint1": "Number of native speakers: Approximately 63 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Dante Alighieri, Leonardo da Vinci",
+      "hint4": [
+        {
+          "country": "Italy",
+          "percent": 93
+        },
+        {
+          "country": "San Marino",
+          "percent": 97
+        },
+        {
+          "country": "Switzerland",
+          "percent": 8
+        },
+        {
+          "country": "Vatican City",
+          "percent": 100
+        }
+      ]
+    },
+    "Polish": {
+      "hint1": "Number of native speakers: Approximately 45 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Marie Curie, Frédéric Chopin",
+      "hint4": [
+        {
+          "country": "Poland",
+          "percent": 97
+        }
+      ]
+    },
+    "Ukrainian": {
+      "hint1": "Number of native speakers: Approximately 30 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Taras Shevchenko, Mila Kunis",
+      "hint4": [
+        {
+          "country": "Ukraine",
+          "percent": 67
+        },
+        {
+          "country": "Russia",
+          "percent": 17
+        }
+      ]
+    },
+    "Dutch": {
+      "hint1": "Number of native speakers: Approximately 23 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Vincent van Gogh, Anne Frank, Eddie Van Halen",
+      "hint4": [
+        {
+          "country": "Netherlands",
+          "percent": 96
+        },
+        {
+          "country": "Belgium",
+          "percent": 59
+        },
+        {
+          "country": "Suriname",
+          "percent": 60
+        }
+      ]
+    },
+    "Arabic": {
+      "hint1": "Number of native speakers: Approximately 310 million",
+      "hint2": "Language Family: Afro-Asiatic",
+      "hint3": "Famous Speakers: Kahlil Gibran, Naguib Mahfouz, Zaha Hadid",
+      "hint4": [
+        {
+          "country": "Egypt",
+          "percent": 68
+        },
+        {
+          "country": "Saudi Arabia",
+          "percent": 95
+        },
+        {
+          "country": "Iraq",
+          "percent": 77
+        },
+        {
+          "country": "Morocco",
+          "percent": 65
+        },
+        {
+          "country": "Algeria",
+          "percent": 72
+        }
+      ]
+    },
+    "Czech": {
+      "hint1": "Number of native speakers: Approximately 10.7 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Franz Kafka, Miloš Forman, Martina Navratilova",
+      "hint4": [
+        {
+          "country": "Czech Republic",
+          "percent": 95
+        }
+      ]
+    },
+    "Swedish": {
+      "hint1": "Number of native speakers: Approximately 9.6 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Alfred Nobel, Greta Garbo, Avicii",
+      "hint4": [
+        {
+          "country": "Sweden",
+          "percent": 90
+        },
+        {
+          "country": "Finland",
+          "percent": 5
+        }
+      ]
+    },
+    "Finnish": {
+      "hint1": "Number of native speakers: Approximately 5.4 million",
+      "hint2": "Language Family: Uralic",
+      "hint3": "Famous Speakers: Jean Sibelius, Linus Torvalds, Mika Häkkinen",
+      "hint4": [
+        {
+          "country": "Finland",
+          "percent": 92
+        }
+      ]
+    },
+    "Danish": {
+      "hint1": "Number of native speakers: Approximately 5.6 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Hans Christian Andersen, Søren Kierkegaard, Mads Mikkelsen",
+      "hint4": [
+        {
+          "country": "Denmark",
+          "percent": 95
+        },
+        {
+          "country": "Greenland",
+          "percent": 20
+        }
+      ]
+    },
+    "Norwegian": {
+      "hint1": "Number of native speakers: Approximately 5.3 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Henrik Ibsen, Edvard Grieg, Magnus Carlsen",
+      "hint4": [
+        {
+          "country": "Norway",
+          "percent": 95
+        }
+      ]
+    },
+    "Hungarian": {
+      "hint1": "Number of native speakers: Approximately 13 million",
+      "hint2": "Language Family: Uralic",
+      "hint3": "Famous Speakers: Béla Bartók, Ernő Rubik, George Soros",
+      "hint4": [
+        {
+          "country": "Hungary",
+          "percent": 99
+        },
+        {
+          "country": "Romania",
+          "percent": 6
+        },
+        {
+          "country": "Slovakia",
+          "percent": 9
+        }
+      ]
+    },
+    "Hebrew": {
+      "hint1": "Number of native speakers: Approximately 5 million",
+      "hint2": "Language Family: Afro-Asiatic",
+      "hint3": "Famous Speakers: David Ben-Gurion, Natalie Portman, Shimon Peres",
+      "hint4": [
+        {
+          "country": "Israel",
+          "percent": 49
+        }
+      ]
+    },
+    "Indonesian": {
+      "hint1": "Number of native speakers: Approximately 43 million",
+      "hint2": "Language Family: Austronesian",
+      "hint3": "Famous Speakers: Susilo Bambang Yudhoyono, Christine Hakim, Iko Uwais",
+      "hint4": [
+        {
+          "country": "Indonesia",
+          "percent": 23
+        }
+      ]
+    },
+    "Romanian": {
+      "hint1": "Number of native speakers: Approximately 24 million",
+      "hint2": "Language Family: Indo-European",
+      "hint3": "Famous Speakers: Mircea Eliade, Nadia Comaneci, Eugene Ionesco",
+      "hint4": [
+        {
+          "country": "Romania",
+          "percent": 91
+        },
+        {
+          "country": "Moldova",
+          "percent": 75
+        }
+      ]
+    },
+    "Thai": {
+        "hint1": "Number of native speakers: Approximately 20 million",
+        "hint2": "Language Family: Kra-Dai",
+        "hint3": "Famous Speakers: Bhumibol Adulyadej, Apichatpong Weerasethakul",
+        "hint4": [
+          {
+            "country": "Thailand",
+            "percent": 93
+          }
+        ]
+      },
+      "German": {
+        "hint1": "Number of native speakers: Approximately 76 million",
+        "hint2": "Language Family: Indo-European",
+        "hint3": "Famous Speakers: Albert Einstein, Johann Wolfgang von Goethe, Angela Merkel",
+        "hint4": [
+          {
+            "country": "Germany",
+            "percent": 78
+          },
+          {
+            "country": "Austria",
+            "percent": 88
+          },
+          {
+            "country": "Switzerland",
+            "percent": 65
+          },
+          {
+            "country": "Luxembourg",
+            "percent": 55
+          },
+          {
+            "country": "Belgium",
+            "percent": 22
+          }
+        ]
+      },
+      "Greek": {
+        "hint1": "Number of native speakers: Approximately 13.5 million",
+        "hint2": "Language Family: Indo-European",
+        "hint3": "Famous Speakers: Homer, Aristotle, Giannis Antetokounmpo",
+        "hint4": [
+          {
+            "country": "Greece",
+            "percent": 99
+          },
+          {
+            "country": "Cyprus",
+            "percent": 76
+          }
+        ]
+      }
+  }
