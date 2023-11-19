@@ -23,37 +23,35 @@ function DailyChallenge() {
   const [guessedLanguages, setGuessedLanguages] = useState(new Set());
   const [lastAttemptDate, setLastAttemptDate] = useState(localStorage.getItem('lastAttemptDate') || '');
   const [attemptCount, setAttemptCount] = useState(parseInt(localStorage.getItem('attemptCount')) || 0);
-  const [showModal, setShowModal] = useState(false);
-  const [record, setRecord] = useState('');
+  const [showResultModal, setShowResultModal] = useState(false);
+  const [resultMessage, setResultMessage] = useState('');
+  const [averageAttempts, setAverageAttempts] = useState(0);
+  const [history, setHistory] = useState(JSON.parse(localStorage.getItem('history')) || []);
+
   useEffect(() => {
     const today = new Date().toISOString().slice(0, 10);
+    selectDailyChallenge();
     if (lastAttemptDate !== today) {
-      setAttemptCount(0); // Reset attempt count if it's a new day
+      setAttemptCount(0);
       setLastAttemptDate(today);
       localStorage.setItem('lastAttemptDate', today);
       localStorage.setItem('attemptCount', '0');
       selectDailyChallenge();
+    } else if (attemptCount > 0) {
+      setShowResultModal(true);
     }
-  }, []);
+    const totalAttempts = history.reduce((sum, record) => sum + record.attempts, 0);
+    const avg = history.length > 0 ? totalAttempts / history.length : 0;
+    setAverageAttempts(avg.toFixed(2));
+  }, [history, lastAttemptDate, attemptCount]);
+  
+
   const selectDailyChallenge = () => {
     const today = new Date();
-    const index = (today.getFullYear() + today.getMonth() + today.getDate()) % languageData.length;
+    const dayOfMonth = today.getDate();
+    const index = dayOfMonth % languageData.length; // Use modulus to avoid index out of bounds
     setCurrentChallenge(languageData[index]);
   };
-
-  // Function to start a new game or round
-  const startNewGame = () => {
-    const randomIndex = Math.floor(Math.random() * languageData.length);
-    setCurrentChallenge(languageData[randomIndex]);
-    setRound(1);
-    setHints([]);
-    setGameOver(false);
-    setGuessedLanguages(new Set());
-    console.log(languageData[randomIndex].name);
-  };
-
-  // Start a new game when the component mounts
-  useEffect(startNewGame, []);
 
   const handleSelectButtonClick = () => {
     if (attemptCount >= 1) {
@@ -82,23 +80,49 @@ function DailyChallenge() {
       setHints([...hints, newHint]);
   
       if (round === 6) {
-        alert(`Failed! The correct language was: ${correctLanguage}`);
         setGameOver(true);
+        setShowResultModal(true);
       } else {
         setRound(round + 1);
       }
       setSelectedLanguage(''); 
     } else if (selectedLanguage === correctLanguage) {
       setGameOver(true);
-      alert(`Congratulations! You've guessed the correct language: ${correctLanguage}`);
+      const successMessage = `Congratulations! You've guessed the correct language: ${correctLanguage}`;
+      setResultMessage(successMessage); // Set success message
+      setShowResultModal(true);
       // Add a hint with the correct answer
       setHints([...hints, `${selectedLanguage}, Correct Answer`]);
       setSelectedLanguage(''); 
+    }else{
+      const failureMessage = `Nice try! The correct language was: ${correctLanguage}`;
+      setResultMessage(failureMessage); // Set failure message
+      setShowResultModal(true);
     }
-    if(gameOver){
+    if (gameOver) {
+      const newRecord = {
+          date: new Date().toISOString().slice(0, 10),
+          attempts: round,
+          success: selectedLanguage === correctLanguage
+      };
+      const newHistory = [...history, newRecord];
+      setHistory(newHistory);
+      localStorage.setItem('history', JSON.stringify(newHistory));
+  
+      const totalAttempts = newHistory.reduce((sum, record) => sum + record.attempts, 0);
+      const avgAttempts = newHistory.length > 0 ? totalAttempts / newHistory.length : 0;
+      setAverageAttempts(avgAttempts.toFixed(2));
+  
+      const message = selectedLanguage === correctLanguage 
+          ? `Congratulations! You've guessed the correct language: ${correctLanguage}` 
+          : `Nice try! The correct language was: ${correctLanguage}`;
+      setResultMessage(message);
+      setShowResultModal(true);
+  
       setAttemptCount(attemptCount + 1);
       localStorage.setItem('attemptCount', (attemptCount + 1).toString());
-    }
+  }
+  
     
   };
     
@@ -128,6 +152,25 @@ function DailyChallenge() {
         </span>
       </div>
     </Navbar>
+
+    <Modal show={showResultModal} onHide={attemptCount > 0 ? () => {} : () => setShowResultModal(false)} centered>
+      <Modal.Header>
+        <Modal.Title style={{color:'#fff'}}>{resultMessage}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body style={{color:'#fff'}}>
+        {gameOver && <p>You guessed it in {round} rounds.</p>}
+        <p>Total games played: {history.length}</p>
+        <p>Your average attempts: {averageAttempts}</p>
+      </Modal.Body>
+      {attemptCount === 0 && (
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => setShowResultModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      )}
+    </Modal>
+
 
     <div className="quiz dark-mode" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: 40, alignItems: 'center', width:'100%', overflow:'hidden'}}>
       <div className="content text-center">
@@ -192,7 +235,7 @@ function DailyChallenge() {
               }),
               menuList: (provided) => ({
                 ...provided,
-                maxHeight: '250px', // Limit the height of the dropdown list
+                // maxHeight: '250px', // Limit the height of the dropdown list
                 overflowY: 'auto',  // Enable scrolling inside the dropdown list
               }),
               menu: (provided) => ({
@@ -224,10 +267,6 @@ function DailyChallenge() {
           Submit
         </Button>
       </Form>}
-       
-        {(gameOver || round > 6) && (
-        <Button variant="primary" className="w-50 my-2" onClick={startNewGame}>Start Over</Button>
-      )}
       </div>
       </div>
     </div>

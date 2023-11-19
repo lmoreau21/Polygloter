@@ -205,7 +205,7 @@ function EndlessMode() {
               }),
               menuList: (provided) => ({
                 ...provided,
-                maxHeight: '250px', // Limit the height of the dropdown list
+                //maxHeight: '250px', // Limit the height of the dropdown list
                 overflowY: 'auto',  // Enable scrolling inside the dropdown list
               }),
               menu: (provided) => ({
@@ -243,7 +243,7 @@ function EndlessMode() {
               <h2>Streak: {score}</h2>
               <h3>High Score: {highScore}</h3>
               <Button variant="primary" className="w-100 my-2" onClick={proceedToNextRound}>
-                Rest
+                Reset
               </Button>
             </div>
           )}

@@ -55,7 +55,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/*" element={<Home />} />
       <Route path="/daily-challenge" element={<DailyChallenge />} />
       <Route path="/endless-mode" element={<EndlessMode />} />
     </Routes>
