@@ -10,7 +10,7 @@ import '../custom-styles.css';
 import { ChevronLeft } from 'react-feather';
 import languageData from '../languages.json';
 import Select from 'react-select';
-
+import { Link } from "react-router-dom";
 function DailyChallenge() {
   // State for the current language challenge
   const [currentChallenge, setCurrentChallenge] = useState({});
@@ -135,11 +135,11 @@ function DailyChallenge() {
     <div style={{ backgroundColor:'#262d4c', height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column'}}>
     <Navbar expand="lg" variant="dark">
       <div className="col-md-4 d-flex align-items-center">
-        <Navbar.Brand href="/" className="d-flex align-items-center">
-          <ChevronLeft />
-          {/* Invisible spacer, same width as 'Daily Challenge' */}
-          
-        </Navbar.Brand>
+              
+      <Navbar.Brand as={Link} to="/Polygloter/home">
+        <ChevronLeft />
+        {/* Rest of your code */}
+      </Navbar.Brand>
       </div>
       <div className="col-md-4 d-flex justify-content-center">
         <span className="navbar-text" style={{ color: "#fff", fontSize: 34 }}>
