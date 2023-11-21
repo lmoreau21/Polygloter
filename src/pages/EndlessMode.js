@@ -91,7 +91,7 @@ function EndlessMode() {
   const proceedToNextRound = () => {
     setShowModal(false);
     setGuessedLanguages(new Set());
-    if (score >= 6) {
+    if (round > 6) {
       setGameOver(true);
       return;
     }
