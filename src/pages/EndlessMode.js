@@ -19,6 +19,8 @@ function EndlessMode() {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [guessedLanguages, setGuessedLanguages] = useState(new Set());
+  const darkMode = localStorage.getItem('darkMode') !== 'false';
+  const hintsEnabled = localStorage.getItem('hintsEnabled') !== 'false';
 
   const [highScore, setHighScore] = useState(
     parseInt(localStorage.getItem('highScore')) || 0
@@ -98,6 +100,13 @@ function EndlessMode() {
     startNewGame();
   };
 
+  const handleFormSubmit = (event) => {
+    event.preventDefault(); // Prevents form from causing page reload
+    if (selectedLanguage) {
+      handleSelectButtonClick(); // Calls the existing button click handler
+    }
+  };
+
   const sortedLanguages = Object.keys(languages).sort().map(language => ({
     value: language,
     label: language
@@ -105,7 +114,7 @@ function EndlessMode() {
 
 
   return (
-    <div style={{ backgroundColor:'#262d4c', height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column'}}>
+    <div style={{ backgroundColor:'#262d4c', minHeight: '100vh', bottom:30, width: '100%', display: 'flex', flexDirection: 'column'}}>
        
     <Navbar expand="lg" variant="dark">
       <div className="col-md-4 d-flex align-items-center">
@@ -156,7 +165,7 @@ function EndlessMode() {
                     {hint.split(',')[0]}
                   </Accordion.Header>
              
-                {!isCorrectAnswer && (
+                  {!isCorrectAnswer && hintsEnabled && (
                   <Accordion.Body>
                     {index === 4 ? 
                       languages[currentChallenge.name]['hint4'].map(item => (
@@ -173,7 +182,7 @@ function EndlessMode() {
 
 
       {!gameOver && 
-      <Form className="d-flex" style={{ width: '80%' }}>
+      <Form className="d-flex" style={{ width: '80%' }} onSubmit={handleFormSubmit}>
         <Form.Group controlId="language-select" style={{width:'100%', textAlign:'left', color:'white'}}>
         <Select 
             options={sortedLanguages}
@@ -234,7 +243,7 @@ function EndlessMode() {
             }}
           />
         </Form.Group>
-        <Button variant="primary" disabled={!selectedLanguage || gameOver} onClick={handleSelectButtonClick}>
+        <Button variant="primary" type="submit" disabled={!selectedLanguage || gameOver}>
           Submit
         </Button>
       </Form>}

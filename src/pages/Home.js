@@ -9,7 +9,8 @@ import '../custom-styles.css';
 const Home = () => {
   const [isInstructionsModalPopupOpen, setInstructionsModalPopupOpen] = useState(false);
   const [isSettingsModalPopupOpen, setSettingsModalPopupOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'false' ? false : true);
+  const [hintsEnabled, setHintsEnabled] = useState(localStorage.getItem('hintsEnabled') === 'false' ? false : true);
 
   const navigate = useNavigate();
 
@@ -23,10 +24,18 @@ const Home = () => {
 
   const onInstClick = () => setInstructionsModalPopupOpen(!isInstructionsModalPopupOpen);
   const onSetClick = () => setSettingsModalPopupOpen(!isSettingsModalPopupOpen);
-  const toggleDarkMode = () => setDarkMode(!darkMode);
-  useEffect(() => {
-    document.body.className = darkMode ? 'dark-mode' : 'light-mode';
-  }, [darkMode]);
+  
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode);
+  };
+
+  const toggleHints = () => {
+    const newHintsEnabled = !hintsEnabled;
+    setHintsEnabled(newHintsEnabled);
+    localStorage.setItem('hintsEnabled', newHintsEnabled);
+  };
 
   return (
     <div className="home dark-mode" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', gap:20 }}>
@@ -116,13 +125,20 @@ const Home = () => {
         <Modal.Title>Settings</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Check 
-          type="switch"
-          id="dark-mode-switch"
-          label="Dark Mode"
-     
-          onChange={toggleDarkMode}
-        />
+      <Form.Check 
+        type="switch"
+        id="dark-mode-switch"
+        label="Dark Mode"
+        checked={darkMode}
+        onChange={toggleDarkMode}
+      />
+      <Form.Check 
+        type="switch"
+        id="hints-switch"
+        label="Hints"
+        checked={hintsEnabled}
+        onChange={toggleHints}
+      />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onSetClick}>Close</Button>
