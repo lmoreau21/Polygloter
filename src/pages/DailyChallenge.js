@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import languages from '../hints.json';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Accordion from 'react-bootstrap/Accordion';
-import { Modal } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../custom-styles.css';
-import { ChevronLeft } from 'react-feather';
-import languageData from '../languages.json';
-import Select from 'react-select';
+import { Accordion, Button, Form, Modal, Navbar } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import Select from 'react-select';
+import { ChevronLeft } from 'react-feather';
+import languages from '../hints.json';
+import languageData from '../languages.json';
+import '../custom-styles.css';
 
 function DailyChallenge() {
-  // State for the current language challenge
   const [currentChallenge, setCurrentChallenge] = useState({});
-
-  // Other states
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [hints, setHints] = useState([]);
   const [round, setRound] = useState(1);
@@ -28,139 +20,148 @@ function DailyChallenge() {
   const [resultMessage, setResultMessage] = useState('');
   const [averageAttempts, setAverageAttempts] = useState(0);
   const [history, setHistory] = useState(JSON.parse(localStorage.getItem('history')) || []);
-  const darkMode = localStorage.getItem('darkMode') !== 'false';
-  const hintsEnabled = localStorage.getItem('hintsEnabled') !== 'false';
+  // Assuming 'guessedLanguages' length is used to determine the last item
+  const initialActiveKey = guessedLanguages.size > 0 ? (guessedLanguages.size - 1).toString() : "0";
+  const [activeKeys, setActiveKeys] = useState([initialActiveKey]);
+
+  const hintsEnabled = true; // Assuming hintsEnabled is stored in localStorage
+  const [correctLanguage,setCorrectLanguage] = useState("");
+  const [hasDone, setHasDone] = useState(false);
 
   useEffect(() => {
     const today = new Date().toISOString().slice(0, 10);
-    const savedGuessedLanguages = JSON.parse(localStorage.getItem('guessedLanguages')) || [];
+    let savedGuessedLanguages = JSON.parse(localStorage.getItem('guessedLanguages')) || [];
     const savedHints = JSON.parse(localStorage.getItem('hints')) || [];
-  
-    // Selecting the daily challenge
+    const loadedHistory = JSON.parse(localStorage.getItem('history')) || [];
+    updateHistoryAndAverage(loadedHistory);
     const dayOfMonth = new Date().getDate();
     const index = dayOfMonth % languageData.length;
-    const newChallenge = languageData[index];
-    setCurrentChallenge(newChallenge);
+    setCurrentChallenge(languageData[index]);
+    setCorrectLanguage(currentChallenge.name);
   
-    // Handle if the current day is different from the last attempt
     if (lastAttemptDate !== today) {
-      setAttemptCount(0);
-      setLastAttemptDate(today);
-      localStorage.setItem('lastAttemptDate', today);
-      localStorage.setItem('attemptCount', '0');
-      localStorage.removeItem('guessedLanguages'); // Clear saved guessed languages
-      localStorage.removeItem('hints'); // Clear saved hints
-      setGuessedLanguages(new Set()); // Reset for new day
-      setHints([]); // Reset hints
-      setRound(1);
-      setGameOver(false);
+      resetForNewDay(today);
     } else {
-      setGuessedLanguages(new Set(savedGuessedLanguages)); // Load saved guessed languages
-      setHints(savedHints); // Load saved hints
-      // Check if game is over and set the round number
-      if (savedGuessedLanguages.length > 0 && newChallenge.name === savedGuessedLanguages[savedGuessedLanguages.length - 1]) {
+      setGuessedLanguages(new Set(savedGuessedLanguages));
+      setHints(savedHints);
+      setRound(savedGuessedLanguages.length + 1);
+      setActiveKeys(savedGuessedLanguages.length > 0 ? [(savedGuessedLanguages.length - 1).toString()] : ["0"]);
+     
+      if ((savedGuessedLanguages.includes(languageData[index].name) || round > 6 ) && !hasDone) {
+        setHasDone(true);
         setGameOver(true);
-        setRound(savedGuessedLanguages.length);
-      } else {
-        setGameOver(false);
-        setRound(savedGuessedLanguages.length + 1);
+        endGame((savedGuessedLanguages.includes(languageData[index].name), languageData[index].name), false);
       }
     }
-  
-    const totalAttempts = history.reduce((sum, record) => sum + record.attempts, 0);
-    const avg = history.length > 0 ? totalAttempts / history.length : 0;
-    setAverageAttempts(avg.toFixed(2));
-  }, [history, lastAttemptDate, attemptCount]);
+  }, [lastAttemptDate, attemptCount, history]);
 
   const handleSelectButtonClick = () => {
     if (attemptCount >= 1) {
       alert("You have already made your attempt for today.");
       return;
     }
-
     if (guessedLanguages.has(selectedLanguage)) {
       alert("You have already guessed this language.");
       return;
     }
-  
-    const correctLanguage = currentChallenge.name;
     const newGuessedLanguages = new Set(guessedLanguages).add(selectedLanguage);
     setGuessedLanguages(newGuessedLanguages);
     localStorage.setItem('guessedLanguages', JSON.stringify(Array.from(newGuessedLanguages)));
-    if (!gameOver && selectedLanguage !== correctLanguage) {
-      // Generate hint based on round
-      let newHint = '';
-      if (round === 1) {
-        newHint = `${selectedLanguage}, Phrase in English: ${currentChallenge.englishPhrase}`;
-      } else {
-        const hintIndex = `hint${round - 1}`;
-        const languageHints = languages[correctLanguage];
-        newHint = languageHints ? `${selectedLanguage}, ${languageHints[hintIndex] || 'No hint available'}` : 'No hints available for this language.';
-      }
-  
-      // Update guessed languages and hints
-      const newGuessedLanguages = new Set(guessedLanguages).add(selectedLanguage);
-      const newHints = [...hints, newHint];
-      
-      setHints(newHints);
-      localStorage.setItem('hints', JSON.stringify(newHints));
-  
-      if (round === 6) {
-        setGameOver(true);
-        setShowResultModal(true);
-      } else {
-        setRound(newGuessedLanguages.size + 1);
-      }
-      setSelectedLanguage(''); 
-    } else if (selectedLanguage === correctLanguage) {
-      setGameOver(true);
-      const successMessage = `Congratulations! You've guessed the correct language: ${correctLanguage}`;
-      setResultMessage(successMessage); // Set success message
-      setShowResultModal(true);
-      // Add a hint with the correct answer
-      setHints([...hints, `${selectedLanguage}, Correct Answer`]);
-      setSelectedLanguage(''); 
-    }else{
-      const failureMessage = `Nice try! The correct language was: ${correctLanguage}`;
-      setResultMessage(failureMessage); // Set failure message
-      setShowResultModal(true);
+
+    if (!gameOver && selectedLanguage !== currentChallenge.name) {
+      updateHints(newGuessedLanguages, selectedLanguage);
+    } else if (selectedLanguage === currentChallenge.name) {
+      endGame(true, false);
     }
-    if (gameOver) {
-      const newRecord = {
-          date: new Date().toISOString().slice(0, 10),
-          attempts: round,
-          success: selectedLanguage === correctLanguage
-      };
-      const newHistory = [...history, newRecord];
-      setHistory(newHistory);
-      localStorage.setItem('history', JSON.stringify(newHistory));
-  
-      const totalAttempts = newHistory.reduce((sum, record) => sum + record.attempts, 0);
-      const avgAttempts = newHistory.length > 0 ? totalAttempts / newHistory.length : 0;
-      setAverageAttempts(avgAttempts.toFixed(2));
-  
-      const message = selectedLanguage === correctLanguage 
-          ? `Congratulations! You've guessed the correct language: ${correctLanguage}` 
-          : `Nice try! The correct language was: ${correctLanguage}`;
-      setResultMessage(message);
-      setShowResultModal(true);
-  
+  };
+
+  const updateHints = (newGuessedLanguages, guessedLanguage) => {
+    let newHint = `${guessedLanguage}, `;
+    if (round === 1) {
+      newHint += `Phrase in English: ${currentChallenge.englishPhrase}`;
+    } else if (round === 5) {
+      const countryData = languages[currentChallenge.name]['hint4'];
+      newHint += countryData.map(item => `${item.country}: ${item.percent}%`).join(', ');
+    } else {
+      const hintIndex = `hint${round - 1}`;
+      const languageHints = languages[currentChallenge.name];
+      newHint += languageHints[hintIndex] || 'No hint available';
+    }
+    const updatedHints = [...hints, newHint];
+    setHints(updatedHints);
+    localStorage.setItem('hints', JSON.stringify(updatedHints));
+    if (round === 6) {
+      endGame(false);
+    } else {
+      console.log(round)
+      setActiveKeys([(round-1).toString()]);
+
+      setRound(round+ 1);
+    }
+    setSelectedLanguage('');
+  };
+
+  const endGame = (isSuccess, data = true) => {
+    setGameOver(true);
+    const message = isSuccess ? `Congratulations! You've guessed the correct language: ${correctLanguage}` : `Nice try! The correct language was: ${correctLanguage}`;
+    setResultMessage(message);
+    setShowResultModal(true);
+    updateHistoryAndAverage([...history, { date: new Date().toISOString().slice(0, 10), attempts: round, success: isSuccess }]);
+    if(data){
       setAttemptCount(attemptCount + 1);
       localStorage.setItem('attemptCount', (attemptCount + 1).toString());
   }
-  
-    
   };
+
+  
+  const updateHistoryAndAverage = (updatedHistory) => {
+    setHistory(updatedHistory);
+    localStorage.setItem('history', JSON.stringify(updatedHistory));
+    const validAttempts = updatedHistory.filter(record => typeof record.attempts === 'number');
+    const totalAttempts = validAttempts.reduce((sum, record) => sum + record.attempts, 0);
+    const avgAttempts = validAttempts.length > 0 ? totalAttempts / validAttempts.length : 0;
+    setAverageAttempts(avgAttempts.toFixed(2));
+  };
+
+  const resetForNewDay = (today) => {
+    setAttemptCount(0);
+    setLastAttemptDate(today);
+    localStorage.setItem('lastAttemptDate', today);
+    localStorage.setItem('attemptCount', '0');
+    localStorage.removeItem('guessedLanguages');
+    localStorage.removeItem('hints');
+    setGuessedLanguages(new Set());
+    setHints([]);
+    setRound(1);
+    setGameOver(false);
+    setActiveKeys(["0"]);
+  };
+
   const handleFormSubmit = (event) => {
-    event.preventDefault(); // Prevents form from causing page reload
+    event.preventDefault();
     if (selectedLanguage) {
-      handleSelectButtonClick(); // Calls the existing button click handler
+      handleSelectButtonClick();
     }
   };
+
   const sortedLanguages = Object.keys(languages).sort().map(language => ({
     value: language,
     label: language
   }));
+
+  const toggleItem = (key) => {
+    console.log("t:"+activeKeys.includes(key));
+    if (activeKeys.includes(key)) {
+      setActiveKeys(activeKeys.filter(activeKey => activeKey !== key));
+    } else {
+      setActiveKeys([...activeKeys, key.toString()]);
+    }
+   
+  };
+  
+  
+  
+  
 
   return (
     <div style={{ backgroundColor:'#262d4c', minHeight: '100vh', bottom:30, width: '100%', display: 'flex', flexDirection: 'column'}}>
@@ -209,35 +210,41 @@ function DailyChallenge() {
         <h3 className="mb-4">Round: {round}/6</h3>
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         
-        <Accordion alwaysOpen style={{ width: '80%' }}>
-          {Array.from(guessedLanguages).map((language, index) => {
-            const hint = hints.find(hint => hint.startsWith(language));
-            return (
-              <Accordion.Item eventKey={index.toString()} key={index}>
-                <Accordion.Header>{language}</Accordion.Header>
-                {hintsEnabled && (
-                  <Accordion.Body>
-                    {hint ? hint.split(',')[1] : 'No hint available'}
-                  </Accordion.Body>
-                )}
-              </Accordion.Item>
-            );
-          })}
+        <Accordion alwaysOpen>
+        {Array.from(guessedLanguages).map((language, index) => {
+          const itemKey = index.toString();
+          const hint = hints.find(hint => hint.startsWith(language));
+          return (
+            <Accordion.Item eventKey={itemKey} key={index}>
+              <Accordion.Header >
+                {language}
+              </Accordion.Header>
+              {hintsEnabled && (
+                <Accordion.Body>
+                  {hint ? hint.split(',')[1] : 'No hint available'}
+                </Accordion.Body>
+              )}
+            </Accordion.Item>
+          );
+        })}
+
         </Accordion>
 
 
-      {!gameOver && 
-      <Form className="d-flex" style={{ width: '80%' }} onSubmit={handleFormSubmit}>
-        <Form.Group controlId="language-select" style={{width:'100%', textAlign:'left', color:'white'}}>
+        {!gameOver && 
+      <Form className="d-flex" style={{ width: '80%', alignItems:'flex-start' }} onSubmit={handleFormSubmit}>
+        <Form.Group controlId="language-select" style={{width:'100%',minHeight:'250px', textAlign:'left', color:'white'}}>
         <Select 
             options={sortedLanguages}
             value={selectedLanguage ? { label: selectedLanguage, value: selectedLanguage } : null}
             onChange={(selectedOption) => setSelectedLanguage(selectedOption ? selectedOption.value : '')}
             isDisabled={gameOver}
             isSearchable={true}
-            placeholder="Select a language..."
             
+            placeholder="Select a language..."
+            onKeyDown={ (event) => {if(event.key === 'Enter'){handleSelectButtonClick}}}
             styles={{
+              color:'white',
               dropdownIndicator: (base, state) => ({
                 ...base,
                 color: 'white', // Set the color of the dropdown indicator
@@ -258,7 +265,7 @@ function DailyChallenge() {
               }),
               menuList: (provided) => ({
                 ...provided,
-                // maxHeight: '250px', // Limit the height of the dropdown list
+                // Limit the height of the dropdown list
                 overflowY: 'auto',  // Enable scrolling inside the dropdown list
               }),
               menu: (provided) => ({
@@ -286,7 +293,7 @@ function DailyChallenge() {
             }}
           />
         </Form.Group>
-        <Button variant="primary"  type="submit"  disabled={!selectedLanguage || gameOver}>
+        <Button variant="primary" type="submit" disabled={!selectedLanguage || gameOver} style={{height:40}}>
           Submit
         </Button>
       </Form>}

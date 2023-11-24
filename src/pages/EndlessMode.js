@@ -11,6 +11,8 @@ import languageData from '../languages.json';
 import Select from 'react-select';
 import { Modal } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { FiHelpCircle } from 'react-icons/fi'; 
+
 function EndlessMode() {
   const [currentChallenge, setCurrentChallenge] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState('');
@@ -21,6 +23,8 @@ function EndlessMode() {
   const [guessedLanguages, setGuessedLanguages] = useState(new Set());
   const darkMode = localStorage.getItem('darkMode') !== 'false';
   const hintsEnabled = localStorage.getItem('hintsEnabled') !== 'false';
+  const [openItem, setOpenItem] = useState("0");
+
 
   const [highScore, setHighScore] = useState(
     parseInt(localStorage.getItem('highScore')) || 0
@@ -68,6 +72,7 @@ function EndlessMode() {
         setGameOver(true);
       } else {
         updateHints();
+        setActiveKeys((round-1).toString())
         setRound(round + 1);
       }
       
@@ -112,9 +117,20 @@ function EndlessMode() {
     label: language
   }));
 
+  const [activeKeys, setActiveKeys] = useState((round-1).toString()); // Initial state with last item open
+
+  const toggleItem = (key) => {
+    let newActiveKeys = [...activeKeys];
+    if (newActiveKeys.includes(key)) {
+      newActiveKeys = newActiveKeys.filter(k => k !== key);
+    } else {
+      newActiveKeys.push(key);
+    }
+    setActiveKeys(newActiveKeys);
+  };
 
   return (
-    <div style={{ backgroundColor:'#262d4c', minHeight: '100vh', bottom:30, width: '100%', display: 'flex', flexDirection: 'column'}}>
+    <div style={{ backgroundColor:'#262d4c', minHeight: '100vh', paddingBottom:20, width: '100%', display: 'flex', flexDirection: 'column'}}>
        
     <Navbar expand="lg" variant="dark">
       <div className="col-md-4 d-flex align-items-center">
@@ -155,13 +171,13 @@ function EndlessMode() {
         <h3 className="mb-4">Round: {round}/6</h3>
         
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Accordion alwaysOpen style={{ width: '80%' }}>
-          {hints.map((hint, index) => {
+        <Accordion  activeKey={activeKeys} alwaysOpen>
+        {hints.map((hint, index) => {
             const isCorrectAnswer = hint.includes('Correct Answer');
             return (
-              <Accordion.Item eventKey={index.toString()} key={index}>
+              <Accordion.Item eventKey={index.toString()}>
                 
-                  <Accordion.Header>
+                <Accordion.Header  onClick={() => toggleItem(index.toString())}>
                     {hint.split(',')[0]}
                   </Accordion.Header>
              
@@ -182,8 +198,8 @@ function EndlessMode() {
 
 
       {!gameOver && 
-      <Form className="d-flex" style={{ width: '80%' }} onSubmit={handleFormSubmit}>
-        <Form.Group controlId="language-select" style={{width:'100%', textAlign:'left', color:'white'}}>
+      <Form className="d-flex" style={{ width: '80%', alignItems:'flex-start' }} onSubmit={handleFormSubmit}>
+        <Form.Group controlId="language-select" style={{width:'100%',minHeight:'250px', textAlign:'left', color:'white'}}>
         <Select 
             options={sortedLanguages}
             value={selectedLanguage ? { label: selectedLanguage, value: selectedLanguage } : null}
@@ -215,7 +231,7 @@ function EndlessMode() {
               }),
               menuList: (provided) => ({
                 ...provided,
-                //maxHeight: '250px', // Limit the height of the dropdown list
+                minHeight: '250px', // Limit the height of the dropdown list
                 overflowY: 'auto',  // Enable scrolling inside the dropdown list
               }),
               menu: (provided) => ({
@@ -243,7 +259,7 @@ function EndlessMode() {
             }}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" disabled={!selectedLanguage || gameOver}>
+        <Button variant="primary" type="submit" disabled={!selectedLanguage || gameOver} style={{height:40}}>
           Submit
         </Button>
       </Form>}
