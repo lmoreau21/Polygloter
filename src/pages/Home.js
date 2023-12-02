@@ -11,7 +11,7 @@ const Home = () => {
   const [isSettingsModalPopupOpen, setSettingsModalPopupOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'false' ? false : true);
   const [hintsEnabled, setHintsEnabled] = useState(localStorage.getItem('hintsEnabled') === 'false' ? false : true);
-
+  
   const navigate = useNavigate();
 
   const onButtonClickDC = useCallback(() => {

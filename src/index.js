@@ -7,10 +7,13 @@ import "./custom-styles.css"
 import { BrowserRouter } from "react-router-dom";
 const container = document.getElementById("root");
 const root = createRoot(container);
+import { ChakraProvider } from '@chakra-ui/react';
 
 root.render(
   <BrowserRouter>
+   <ChakraProvider>
     <App />
+    </ChakraProvider>
   </BrowserRouter>
 );
 

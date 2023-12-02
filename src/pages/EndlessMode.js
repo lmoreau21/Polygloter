@@ -12,6 +12,8 @@ import Select from 'react-select';
 import { Modal } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { FiHelpCircle } from 'react-icons/fi'; 
+import MapChart from './Map';
+
 
 function EndlessMode() {
   const [currentChallenge, setCurrentChallenge] = useState({});
@@ -70,6 +72,7 @@ function EndlessMode() {
     } else {
       if (round === 6) {
         setGameOver(true);
+        
       } else {
         updateHints();
         setActiveKeys((round-1).toString())
@@ -95,6 +98,15 @@ function EndlessMode() {
     setSelectedLanguage('');
   };
 
+  const fullStartOver = () => {
+    setShowModal(false);
+    setGuessedLanguages(new Set());
+    setGameOver(false);
+    setScore(0);
+    startNewGame();
+  };
+
+  
   const proceedToNextRound = () => {
     setShowModal(false);
     setGuessedLanguages(new Set());
@@ -156,11 +168,11 @@ function EndlessMode() {
         <Modal.Header color='white' closeButton>
           <Modal.Title style={{color:'white'}}>Game Over</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{color:'white'}}>You got a score of: {score}</Modal.Body>
-        {score <= highScore && <Modal.Body style={{color:'white'}}>Current high score: {highScore}</Modal.Body>}
-        {score > highScore && <Modal.Body style={{color:'white'}}>New high score!</Modal.Body>}
+        <Modal.Body style={{color:'white'}}>Score: {score}</Modal.Body>
+        {score < highScore && <Modal.Body style={{color:'white'}}>High Score: {highScore}</Modal.Body>}
+        {score >= highScore && <Modal.Body style={{color:'white'}}>New high score!</Modal.Body>}
         <Modal.Footer>
-          <Button variant="primary" onClick={() => proceedToNextRound()}>
+          <Button variant="primary" onClick={() => fullStartOver()}>
             Start Over
           </Button>
         </Modal.Footer>
@@ -169,8 +181,9 @@ function EndlessMode() {
       <div className="content text-center">
         <h1 className="display-1">{currentChallenge.phrase}</h1>
         <h3 className="mb-4">Round: {round}/6</h3>
-        
+       
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        
         <Accordion  activeKey={activeKeys} alwaysOpen>
         {hints.map((hint, index) => {
             const isCorrectAnswer = hint.includes('Correct Answer');
@@ -184,9 +197,7 @@ function EndlessMode() {
                   {!isCorrectAnswer && hintsEnabled && (
                   <Accordion.Body>
                     {index === 4 ? 
-                      languages[currentChallenge.name]['hint4'].map(item => (
-                        <p key={item.country}>{item.country}: {item.percent}%</p>
-                      )) :
+                     <MapChart language={currentChallenge.name}/>:
                       hint.split(',')[1]
                     }
                   </Accordion.Body>
@@ -264,15 +275,6 @@ function EndlessMode() {
         </Button>
       </Form>}
        
-      {gameOver && (
-            <div>
-              <h2>Streak: {score}</h2>
-              <h3>High Score: {highScore}</h3>
-              <Button variant="primary" className="w-100 my-2" onClick={proceedToNextRound}>
-                Reset
-              </Button>
-            </div>
-          )}
       </div>
       </div> </div>
     </div>

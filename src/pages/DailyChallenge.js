@@ -6,6 +6,7 @@ import { ChevronLeft } from 'react-feather';
 import languages from '../hints.json';
 import languageData from '../languages.json';
 import '../custom-styles.css';
+import MapChart from './Map';
 
 function DailyChallenge() {
   const [currentChallenge, setCurrentChallenge] = useState({});
@@ -44,14 +45,17 @@ function DailyChallenge() {
     } else {
       setGuessedLanguages(new Set(savedGuessedLanguages));
       setHints(savedHints);
-      setRound(savedGuessedLanguages.length + 1);
+      if(round<=5){
+      setRound(savedGuessedLanguages.length + 1);}
       setActiveKeys(savedGuessedLanguages.length > 0 ? [(savedGuessedLanguages.length - 1).toString()] : ["0"]);
      
       if ((savedGuessedLanguages.includes(languageData[index].name) || round > 6 ) && !hasDone) {
         setHasDone(true);
+        setRound(savedGuessedLanguages.length);
         setGameOver(true);
         endGame((savedGuessedLanguages.includes(languageData[index].name), languageData[index].name), false);
       }
+      
     }
   }, [lastAttemptDate, attemptCount, history]);
 
@@ -79,23 +83,19 @@ function DailyChallenge() {
     let newHint = `${guessedLanguage}, `;
     if (round === 1) {
       newHint += `Phrase in English: ${currentChallenge.englishPhrase}`;
-    } else if (round === 5) {
-      const countryData = languages[currentChallenge.name]['hint4'];
-      newHint += countryData.map(item => `${item.country}: ${item.percent}%`).join(', ');
     } else {
       const hintIndex = `hint${round - 1}`;
       const languageHints = languages[currentChallenge.name];
-      newHint += languageHints[hintIndex] || 'No hint available';
+      newHint += languageHints[hintIndex];
     }
     const updatedHints = [...hints, newHint];
     setHints(updatedHints);
     localStorage.setItem('hints', JSON.stringify(updatedHints));
-    if (round === 6) {
+    if (round >= 6) {
+      setRound(6);
       endGame(false);
     } else {
-      console.log(round)
       setActiveKeys([(round-1).toString()]);
-
       setRound(round+ 1);
     }
     setSelectedLanguage('');
@@ -106,6 +106,7 @@ function DailyChallenge() {
     const message = isSuccess ? `Congratulations! You've guessed the correct language: ${correctLanguage}` : `Nice try! The correct language was: ${correctLanguage}`;
     setResultMessage(message);
     setShowResultModal(true);
+    if(round > 6){setRound(6);}
     updateHistoryAndAverage([...history, { date: new Date().toISOString().slice(0, 10), attempts: round, success: isSuccess }]);
     if(data){
       setAttemptCount(attemptCount + 1);
@@ -174,13 +175,13 @@ function DailyChallenge() {
       </Navbar.Brand>
       </div>
       <div className="col-md-4 d-flex justify-content-center">
-        <span className="navbar-text" style={{ color: "#fff", fontSize: 34 }}>
+        <span className="navbar-text" style={{ color: "#fff", fontSize: 34, display: "flex", justifyContent: "center", alignItems: "center" }}>
           Polygloter
         </span>
       </div>
       <div className="col-md-4 d-flex justify-content-end">
         <span className="navbar-text" style={{ color: "#fff", fontSize: 18, paddingRight:20 }}>
-          {/* Daily Challenge */}
+           Daily
         </span>
       </div>
     </Navbar>
@@ -221,7 +222,10 @@ function DailyChallenge() {
               </Accordion.Header>
               {hintsEnabled && (
                 <Accordion.Body>
-                  {hint ? hint.split(',')[1] : 'No hint available'}
+                  {index === 4 ? 
+                     <MapChart language={currentChallenge.name}/> : 
+                     ((index === 5) ? 'No Hint Available' : hint.split(',')[1])
+                    }
                 </Accordion.Body>
               )}
             </Accordion.Item>
