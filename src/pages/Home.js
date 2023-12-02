@@ -16,11 +16,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   const onButtonClickDC = useCallback(() => {
-    navigate("/Polygloter/daily-challenge");
+    navigate("/daily-challenge");
   }, [navigate]);
 
   const onButtonClickEM = useCallback(() => {
-    navigate("/Polygloter/endless-mode");
+    navigate("/endless-mode");
   }, [navigate]);
 
   const onInstClick = () => setInstructionsModalPopupOpen(!isInstructionsModalPopupOpen);
