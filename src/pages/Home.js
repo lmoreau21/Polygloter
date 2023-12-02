@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../custom-styles.css'; 
 
+
 const Home = () => {
   const [isInstructionsModalPopupOpen, setInstructionsModalPopupOpen] = useState(false);
   const [isSettingsModalPopupOpen, setSettingsModalPopupOpen] = useState(false);
@@ -15,11 +16,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   const onButtonClickDC = useCallback(() => {
-    navigate("/daily-challenge");
+    navigate("/Polygloter/daily-challenge");
   }, [navigate]);
 
   const onButtonClickEM = useCallback(() => {
-    navigate("/endless-mode");
+    navigate("/Polygloter/endless-mode");
   }, [navigate]);
 
   const onInstClick = () => setInstructionsModalPopupOpen(!isInstructionsModalPopupOpen);

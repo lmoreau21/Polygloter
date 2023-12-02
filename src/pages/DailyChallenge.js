@@ -7,8 +7,11 @@ import languages from '../hints.json';
 import languageData from '../languages.json';
 import '../custom-styles.css';
 import MapChart from './Map';
-
+import Confetti from 'react-confetti'
+import useWindowSize from 'react-use/lib/useWindowSize'
+import HeadShake from 'react-reveal/HeadShake';
 function DailyChallenge() {
+  const { width, height } = useWindowSize();
   const [currentChallenge, setCurrentChallenge] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [hints, setHints] = useState([]);
@@ -21,6 +24,8 @@ function DailyChallenge() {
   const [resultMessage, setResultMessage] = useState('');
   const [averageAttempts, setAverageAttempts] = useState(0);
   const [history, setHistory] = useState(JSON.parse(localStorage.getItem('history')) || []);
+
+  const [gameWon, setGameWon] = useState(false);
   // Assuming 'guessedLanguages' length is used to determine the last item
   const initialActiveKey = guessedLanguages.size > 0 ? (guessedLanguages.size - 1).toString() : "0";
   const [activeKeys, setActiveKeys] = useState([initialActiveKey]);
@@ -50,6 +55,9 @@ function DailyChallenge() {
       setActiveKeys(savedGuessedLanguages.length > 0 ? [(savedGuessedLanguages.length - 1).toString()] : ["0"]);
      
       if ((savedGuessedLanguages.includes(languageData[index].name) || round > 6 ) && !hasDone) {
+        if(savedGuessedLanguages.includes(languageData[index].name)){
+          setGameWon(true);
+        }
         setHasDone(true);
         setRound(savedGuessedLanguages.length);
         setGameOver(true);
@@ -101,8 +109,11 @@ function DailyChallenge() {
     setSelectedLanguage('');
   };
 
-  const endGame = (isSuccess, data = true) => {
+  const endGame = (isSuccess , data = true) => {
     setGameOver(true);
+    if(isSuccess){
+      setGameWon(true);
+    }
     const message = isSuccess ? `Congratulations! You've guessed the correct language: ${correctLanguage}` : `Nice try! The correct language was: ${correctLanguage}`;
     setResultMessage(message);
     setShowResultModal(true);
@@ -159,10 +170,6 @@ function DailyChallenge() {
     }
    
   };
-  
-  
-  
-  
 
   return (
     <div style={{ backgroundColor:'#262d4c', minHeight: '100vh', bottom:30, width: '100%', display: 'flex', flexDirection: 'column'}}>
@@ -185,7 +192,7 @@ function DailyChallenge() {
         </span>
       </div>
     </Navbar>
-
+    {showResultModal && gameWon && <Confetti width={width} height={height} style={{zIndex:"2"}}/>}
     <Modal show={showResultModal} onHide={attemptCount > 0 ? () => {} : () => setShowResultModal(false)} centered>
       <Modal.Header>
         <Modal.Title style={{color:'#fff'}}>{resultMessage}</Modal.Title>
@@ -195,7 +202,7 @@ function DailyChallenge() {
         <p>Total games played: {history.length}</p>
         <p>Your average attempts: {averageAttempts}</p>
       </Modal.Body>
-      {attemptCount === 0 && (
+      {(
         <Modal.Footer>
           <Button variant="primary" onClick={() => setShowResultModal(false)}>
             Close
@@ -204,40 +211,42 @@ function DailyChallenge() {
       )}
     </Modal>
 
-
+   
     <div className="quiz dark-mode" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: 40, alignItems: 'center', width:'100%', overflow:'hidden'}}>
       <div className="content text-center">
         <h1 className="display-1">{currentChallenge.phrase}</h1>
         <h3 className="mb-4">Round: {round}/6</h3>
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column-reverse', alignItems: 'center' }}>
+          
         <Accordion alwaysOpen>
-        {Array.from(guessedLanguages).map((language, index) => {
+        {(Array.from(guessedLanguages)).reverse().map((language, index) => {
           const itemKey = index.toString();
           const hint = hints.find(hint => hint.startsWith(language));
           return (
             <Accordion.Item eventKey={itemKey} key={index}>
               <Accordion.Header >
-                {language}
+              {index === 0 ? round === 2 ?  <HeadShake>{language}</HeadShake>:
+                    <HeadShake spy={round}> {language}</HeadShake> : 
+                    language}
+               
               </Accordion.Header>
-              {hintsEnabled && (
+             
                 <Accordion.Body>
-                  {index === 4 ? 
+                  {(index === 0 && round >= 6) ? 
+                  
                      <MapChart language={currentChallenge.name}/> : 
                      ((index === 5) ? 'No Hint Available' : hint.split(',')[1])
                     }
                 </Accordion.Body>
-              )}
+              
             </Accordion.Item>
           );
         })}
 
         </Accordion>
-
-
         {!gameOver && 
-      <Form className="d-flex" style={{ width: '80%', alignItems:'flex-start' }} onSubmit={handleFormSubmit}>
-        <Form.Group controlId="language-select" style={{width:'100%',minHeight:'250px', textAlign:'left', color:'white'}}>
+      <Form className="d-flex" style={{ width: '80%', alignItems:'flex-start', zIndex:4 }} onSubmit={handleFormSubmit}>
+        <Form.Group controlId="language-select" style={{width:'100%', textAlign:'left', color:'white'}}>
         <Select 
             options={sortedLanguages}
             value={selectedLanguage ? { label: selectedLanguage, value: selectedLanguage } : null}
@@ -253,7 +262,7 @@ function DailyChallenge() {
                 ...base,
                 color: 'white', // Set the color of the dropdown indicator
                 ':hover': {
-                  color: '#ffa28b7f', 
+                  color: '#ffa28b', 
                 },
                 ':active': {
                   color: 'white', 
@@ -269,7 +278,6 @@ function DailyChallenge() {
               }),
               menuList: (provided) => ({
                 ...provided,
-                // Limit the height of the dropdown list
                 overflowY: 'auto',  // Enable scrolling inside the dropdown list
               }),
               menu: (provided) => ({
@@ -280,10 +288,11 @@ function DailyChallenge() {
               }),
               option: (provided, state) => ({
                 ...provided,
-                backgroundColor: state.isFocused ? '#ffa28b7f' : 'transparent',
+                backgroundColor: 'transparent',
                 color: 'white',
-                ':active': {
-                  backgroundColor: '#ffa28b7f',
+              
+                ':hover': {
+                  backgroundColor: '#ffa28b7f', 
                 },
               }),
               singleValue: (provided) => ({
@@ -301,6 +310,11 @@ function DailyChallenge() {
           Submit
         </Button>
       </Form>}
+      
+      
+
+
+     
       </div>
       </div>
     </div>

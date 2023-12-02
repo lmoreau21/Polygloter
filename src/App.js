@@ -56,8 +56,8 @@ function App() {
   return (
     <Routes>
       <Route path="/*" element={<Home />} />
-      <Route path="/daily-challenge" element={<DailyChallenge />} />
-      <Route path="/endless-mode" element={<EndlessMode />} />
+      <Route path="/Polygloter/daily-challenge" element={<DailyChallenge />} />
+      <Route path="/Polygloter/endless-mode" element={<EndlessMode />} />
     </Routes>
   );
 }

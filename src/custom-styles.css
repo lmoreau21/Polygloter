@@ -2,6 +2,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap");
 /* Home background and styling */
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .home {
   background: url('/public/map.svg') no-repeat center center fixed;
   background-size: cover;
@@ -11,6 +22,8 @@
   align-items: center;
   background-color: #262d4c;
   font-family: 'Open Sans', 'Playfair Display';
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 .quiz {
     background-size: cover;
@@ -20,6 +33,9 @@
     align-items: center;
     background-color: #262d4c;
     font-family: 'Open Sans', 'Playfair Display';
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    margin-bottom: 10px;
   }
 /* Content styling */
 .content {

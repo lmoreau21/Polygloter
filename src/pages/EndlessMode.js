@@ -12,10 +12,13 @@ import Select from 'react-select';
 import { Modal } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { FiHelpCircle } from 'react-icons/fi'; 
+import HeadShake from 'react-reveal/HeadShake';
 import MapChart from './Map';
-
-
+import Confetti from 'react-confetti'
+import useWindowSize from 'react-use/lib/useWindowSize'
 function EndlessMode() {
+  const { width, height } = useWindowSize();
+  
   const [currentChallenge, setCurrentChallenge] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [hints, setHints] = useState([]);
@@ -27,12 +30,12 @@ function EndlessMode() {
   const hintsEnabled = localStorage.getItem('hintsEnabled') !== 'false';
   const [openItem, setOpenItem] = useState("0");
 
-
+  const [gameWon, setGameWon] = useState(false);
   const [highScore, setHighScore] = useState(
     parseInt(localStorage.getItem('highScore')) || 0
   );
   const [showModal, setShowModal] = useState(false); // State for controlling modal visibility
-
+   
   useEffect(() => {
     startNewGame();
   }, []);
@@ -67,6 +70,7 @@ function EndlessMode() {
     if (selectedLanguage === correctLanguage) {
       setScore(score + 1);
       alert(`Congratulations! You've guessed the correct language: ${correctLanguage}`);
+     
       proceedToNextRound();
        
     } else {
@@ -75,7 +79,7 @@ function EndlessMode() {
         
       } else {
         updateHints();
-        setActiveKeys((round-1).toString())
+        setActiveKeys((0).toString())
         setRound(round + 1);
       }
       
@@ -94,7 +98,7 @@ function EndlessMode() {
       newHint = languageHints ? `${selectedLanguage}, ${languageHints[hintIndex] || 'No hint available'}` : 'No hints available for this language.';
     }
     setGuessedLanguages(new Set(guessedLanguages).add(selectedLanguage));
-    setHints([...hints, newHint]);
+    setHints([newHint,...hints]);
     setSelectedLanguage('');
   };
 
@@ -129,7 +133,7 @@ function EndlessMode() {
     label: language
   }));
 
-  const [activeKeys, setActiveKeys] = useState((round-1).toString()); // Initial state with last item open
+  const [activeKeys, setActiveKeys] = useState(('0')); // Initial state with last item open
 
   const toggleItem = (key) => {
     let newActiveKeys = [...activeKeys];
@@ -163,8 +167,9 @@ function EndlessMode() {
         </span>
       </div>
     </Navbar>
-
+   
     <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+   
         <Modal.Header color='white' closeButton>
           <Modal.Title style={{color:'white'}}>Game Over</Modal.Title>
         </Modal.Header>
@@ -180,37 +185,36 @@ function EndlessMode() {
     <div className="quiz dark-mode" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: 40, alignItems: 'center', width:'100%', overflow:'hidden'}}>
       <div className="content text-center">
         <h1 className="display-1">{currentChallenge.phrase}</h1>
-        <h3 className="mb-4">Round: {round}/6</h3>
+        <h3 className="mb-4">Guess: {round}/6</h3>
        
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column-reverse', alignItems: 'center' }}>
+      
         <Accordion  activeKey={activeKeys} alwaysOpen>
         {hints.map((hint, index) => {
-            const isCorrectAnswer = hint.includes('Correct Answer');
             return (
               <Accordion.Item eventKey={index.toString()}>
                 
                 <Accordion.Header  onClick={() => toggleItem(index.toString())}>
-                    {hint.split(',')[0]}
+                   {index === 0 ? round === 2 ?  <HeadShake>{hint.split(',')[0]}</HeadShake>:
+                    <HeadShake spy={round}>{hint.split(',')[0]}</HeadShake> : 
+                    hint.split(',')[0]}
                   </Accordion.Header>
-             
-                  {!isCorrectAnswer && hintsEnabled && (
                   <Accordion.Body>
-                    {index === 4 ? 
-                     <MapChart language={currentChallenge.name}/>:
-                      hint.split(',')[1]
+                  {index === 0 && round>=6  ? 
+                     <MapChart language={currentChallenge.name}/> : 
+                     ((index === 5) ? 'No Hint Available' : hint.split(',')[1])
                     }
-                  </Accordion.Body>
-                )}
+                </Accordion.Body>
+              
               </Accordion.Item>
             );
           })}
         </Accordion>
 
 
-      {!gameOver && 
-      <Form className="d-flex" style={{ width: '80%', alignItems:'flex-start' }} onSubmit={handleFormSubmit}>
-        <Form.Group controlId="language-select" style={{width:'100%',minHeight:'250px', textAlign:'left', color:'white'}}>
+        {!gameOver && 
+      <Form className="d-flex" style={{ width: '80%', alignItems:'flex-start', zIndex:4 }} onSubmit={handleFormSubmit}>
+        <Form.Group controlId="language-select" style={{width:'100%', textAlign:'left', color:'white'}}>
         <Select 
             options={sortedLanguages}
             value={selectedLanguage ? { label: selectedLanguage, value: selectedLanguage } : null}
@@ -242,7 +246,6 @@ function EndlessMode() {
               }),
               menuList: (provided) => ({
                 ...provided,
-                minHeight: '250px', // Limit the height of the dropdown list
                 overflowY: 'auto',  // Enable scrolling inside the dropdown list
               }),
               menu: (provided) => ({
@@ -253,9 +256,12 @@ function EndlessMode() {
               }),
               option: (provided, state) => ({
                 ...provided,
-                backgroundColor: state.isFocused ? '#ffa28b7f' : 'transparent',
+                backgroundColor:  'transparent',
                 color: 'white',
                 ':active': {
+                  backgroundColor: '#ffa28b7f',
+                },
+                ':hover': {
                   backgroundColor: '#ffa28b7f',
                 },
               }),
