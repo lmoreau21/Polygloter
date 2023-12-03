@@ -1,7 +1,7 @@
 {
   "name": "polygloter",
   "version": "0.1.0",
-  "homepage": "https://lmoreau21.github.io/Polygloter/",
+  "homepage": "https://lmoreau21.github.io/Polygloter",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
