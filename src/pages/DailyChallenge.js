@@ -176,7 +176,7 @@ function DailyChallenge() {
     <Navbar expand="lg" variant="dark">
       <div className="col-md-4 d-flex align-items-center">
               
-      <Link to="/Polygloter/">
+      <Link to="/">
         <ChevronLeft />
         {/* Rest of your code */}
       </Link>
