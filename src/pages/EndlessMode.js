@@ -152,7 +152,7 @@ function EndlessMode() {
     <Navbar expand="lg" variant="dark">
       <div className="col-md-4 d-flex align-items-center">
           
-      <Link to="/">
+      <Link to="/Polygloter/home">
         <ChevronLeft />
         {/* Rest of your code */}
       </Link>
