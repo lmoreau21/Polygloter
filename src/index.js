@@ -12,7 +12,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 root.render(
   <BrowserRouter>
    <ChakraProvider>
-    <App />
+      <App />
     </ChakraProvider>
   </BrowserRouter>
 );
