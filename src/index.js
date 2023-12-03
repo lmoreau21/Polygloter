@@ -10,11 +10,10 @@ const root = createRoot(container);
 import { ChakraProvider } from '@chakra-ui/react';
 
 root.render(
-  <HashRouter>
+  
    <ChakraProvider>
       <App />
     </ChakraProvider>
-  </HashRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
