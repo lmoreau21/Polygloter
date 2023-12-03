@@ -235,7 +235,7 @@ function DailyChallenge() {
                   {(index === 0 && round >= 6) ? 
                   
                      <MapChart language={currentChallenge.name}/> : 
-                     ((index === 5) ? 'No Hint Available' : hint.split(',')[1])
+                     ((gameOver || index === 5) ? 'No Hint Available' : hint.split(',')[1])
                     }
                 </Accordion.Body>
               
