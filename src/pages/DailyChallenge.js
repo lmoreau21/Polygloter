@@ -10,6 +10,9 @@ import MapChart from './Map';
 import Confetti from 'react-confetti'
 import useWindowSize from 'react-use/lib/useWindowSize'
 import HeadShake from 'react-reveal/HeadShake';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function DailyChallenge() {
   const { width, height } = useWindowSize();
   const [currentChallenge, setCurrentChallenge] = useState({});
@@ -33,6 +36,65 @@ function DailyChallenge() {
   const hintsEnabled = true; // Assuming hintsEnabled is stored in localStorage
   const [correctLanguage,setCorrectLanguage] = useState("");
   const [hasDone, setHasDone] = useState(false);
+
+  const handleShare = () => {
+    const currentDate = new Date().toLocaleDateString();
+    const status = gameWon  ? 'Win 🎊': 'Failed 😢' ;
+    const text = `Polygloter 🌍 ${currentDate} - Guesses: ${round}/6, Status: ${status} Try Me: https://lmoreau21.github.io/Polygloter/`;
+  
+    if (navigator.share) {
+      navigator.share({
+        title: 'Polygloter',
+        text: text,
+        url: 'https://lmoreau21.github.io/Polygloter/'
+      })
+      .then(() => {
+        toast('Content shared!', { 
+          position: "top-center",
+          type: 'default', 
+          autoClose: 2000,
+          style: {
+            backgroundColor: 'rgba(92, 103, 153, 0.9)',
+            color: '#ffffff'
+          }
+        });
+      })
+      .catch(() => {
+        toast('Failed to share content.', { 
+          type: 'error', 
+          autoClose: 2000,
+          style: {
+            backgroundColor: 'rgba(92, 103, 153, 0.9)',
+            color: '#ffffff'
+          }
+        });
+      });
+    } else {
+      navigator.clipboard.writeText(text)
+      .then(() => {
+        toast('Copied to clipboard!', { 
+          position: "top-center",
+          type: 'default', 
+          autoClose: 2000,
+          style: {
+            backgroundColor: 'rgba(92, 103, 153, 0.9)',
+            color: '#ffffff'
+          }
+        });
+      })
+      .catch(() => {
+        toast('Failed to copy text.', { 
+          type: 'error', 
+          autoClose: 2000,
+          style: {
+            backgroundColor: 'rgba(92, 103, 153, 0.9)',
+            color: '#ffffff'
+          }
+        });
+      });
+    }
+  };
+
 
   useEffect(() => {
     const today = new Date().toISOString().slice(0, 10);
@@ -116,6 +178,7 @@ function DailyChallenge() {
     }
     const message = isSuccess ? `Congratulations! You've guessed the correct language: ${correctLanguage}` : `Nice try! The correct language was: ${correctLanguage}`;
     setResultMessage(message);
+    
     setShowResultModal(true);
     if(round > 6){setRound(6);}
     updateHistoryAndAverage([...history, { date: new Date().toISOString().slice(0, 10), attempts: round, success: isSuccess }]);
@@ -191,7 +254,9 @@ function DailyChallenge() {
            Daily
         </span>
       </div>
+      
     </Navbar>
+    <ToastContainer />
     {showResultModal && gameWon && <Confetti width={width} height={height} style={{zIndex:"2"}}/>}
     <Modal show={showResultModal} onHide={attemptCount > 0 ? () => {} : () => setShowResultModal(false)} centered>
       <Modal.Header>
@@ -201,6 +266,9 @@ function DailyChallenge() {
         {gameOver && <p>You guessed it in {round} rounds.</p>}
         <p>Total games played: {history.length}</p>
         <p>Your average attempts: {averageAttempts}</p>
+        <Button variant="primary" onClick={handleShare}>
+            Share
+          </Button>
       </Modal.Body>
       {(
         <Modal.Footer>
