@@ -10,7 +10,7 @@ function App() {
       <Route path="/Polygloter/" element={<Home />} />
       <Route path="/Polygloter/daily-challenge" element={<DailyChallenge />} />
       <Route path="/Polygloter/endless-mode" element={<EndlessMode />} />
-      <Route path="*" element={<Home />} /> {/* Fallback for 404 */}
+      <Route path="/*" element={<Home />} /> {/* Fallback for 404 */}
     </Routes>
   );
 }

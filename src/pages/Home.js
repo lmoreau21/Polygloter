@@ -65,10 +65,10 @@ const Home = () => {
 
         {/* Instructions Modal */}
         <Modal show={isInstructionsModalPopupOpen} onHide={onInstClick} centered size='lg'>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton style={{color:'white'}}>
             <Modal.Title>Welcome to Polygloter</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body  style={{color:'white'}}>
             <p>Test your linguistic skills and become a language detective!</p>
             <h3>Daily Challenge:</h3>
             <ul>

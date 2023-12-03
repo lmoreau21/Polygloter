@@ -65,7 +65,7 @@ function DailyChallenge() {
       }
       
     }
-  }, [lastAttemptDate, attemptCount, history]);
+  }, [lastAttemptDate, attemptCount]);
 
   const handleSelectButtonClick = () => {
     if (attemptCount >= 1) {
@@ -176,10 +176,10 @@ function DailyChallenge() {
     <Navbar expand="lg" variant="dark">
       <div className="col-md-4 d-flex align-items-center">
               
-      <Navbar.Brand as={Link} to="/Polygloter/">
+      <Link to="/Polygloter/">
         <ChevronLeft />
         {/* Rest of your code */}
-      </Navbar.Brand>
+      </Link>
       </div>
       <div className="col-md-4 d-flex justify-content-center">
         <span className="navbar-text" style={{ color: "#fff", fontSize: 34, display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -254,7 +254,7 @@ function DailyChallenge() {
             isDisabled={gameOver}
             isSearchable={true}
             
-            placeholder="Select a language..."
+            placeholder="Language"
             onKeyDown={ (event) => {if(event.key === 'Enter'){handleSelectButtonClick}}}
             styles={{
               color:'white',

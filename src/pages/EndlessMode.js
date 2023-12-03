@@ -3,6 +3,7 @@ import languages from '../hints.json';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../custom-styles.css';
@@ -151,10 +152,10 @@ function EndlessMode() {
     <Navbar expand="lg" variant="dark">
       <div className="col-md-4 d-flex align-items-center">
           
-      <Navbar.Brand as={Link} to="/Polygloter/">
+      <Link to="/Polygloter/">
         <ChevronLeft />
         {/* Rest of your code */}
-      </Navbar.Brand>
+      </Link>
       </div>
       <div className="col-md-4 d-flex justify-content-center">
         <span className="navbar-text" style={{ color: "#fff", fontSize: 34 }}>
@@ -173,9 +174,12 @@ function EndlessMode() {
         <Modal.Header color='white' closeButton>
           <Modal.Title style={{color:'white'}}>Game Over</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{color:'white'}}>Score: {score}</Modal.Body>
-        {score < highScore && <Modal.Body style={{color:'white'}}>High Score: {highScore}</Modal.Body>}
-        {score >= highScore && <Modal.Body style={{color:'white'}}>New high score!</Modal.Body>}
+        <Modal.Body style={{color:'white'}}>
+        <h6>Correct Language: {currentChallenge.name}</h6>
+        <h6>Score: {score}</h6>
+        {score < highScore && <h6>High Score: {highScore}</h6>}
+        {score >= highScore && <h6>New high score!</h6>}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={() => fullStartOver()}>
             Start Over
@@ -213,7 +217,7 @@ function EndlessMode() {
 
 
         {!gameOver && 
-      <Form className="d-flex" style={{ width: '80%', alignItems:'flex-start', zIndex:4 }} onSubmit={handleFormSubmit}>
+      <Form className="d-flex" style={{ width: '80%', alignItems:'flex-start', zIndex:4}} onSubmit={handleFormSubmit}>
         <Form.Group controlId="language-select" style={{width:'100%', textAlign:'left', color:'white'}}>
         <Select 
             options={sortedLanguages}
@@ -222,7 +226,7 @@ function EndlessMode() {
             isDisabled={gameOver}
             isSearchable={true}
             
-            placeholder="Select a language..."
+            placeholder="Language"
             onKeyDown={ (event) => {if(event.key === 'Enter'){handleSelectButtonClick}}}
             styles={{
               color:'white',
