@@ -5,8 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../custom-styles.css'; 
-
-
+import '../global.css';
+import Switch from "react-switch";
 const Home = () => {
   const [isInstructionsModalPopupOpen, setInstructionsModalPopupOpen] = useState(false);
   const [isSettingsModalPopupOpen, setSettingsModalPopupOpen] = useState(false);
@@ -16,11 +16,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   const onButtonClickDC = useCallback(() => {
-    navigate("/daily-challenge");
+    navigate("daily-challenge");
   }, [navigate]);
 
   const onButtonClickEM = useCallback(() => {
-    navigate("/endless-mode");
+    navigate("endless-mode");
   }, [navigate]);
 
   const onInstClick = () => setInstructionsModalPopupOpen(!isInstructionsModalPopupOpen);
@@ -121,25 +121,35 @@ const Home = () => {
 
 
     {/* Settings Modal */}
-    <Modal show={isSettingsModalPopupOpen} onHide={onSetClick} centered>
+    <Modal show={isSettingsModalPopupOpen} onHide={onSetClick} centered style={{color:'white'}}>
       <Modal.Header closeButton>
-        <Modal.Title>Settings</Modal.Title>
+        <Modal.Title>Settings</Modal.Title >
       </Modal.Header>
       <Modal.Body>
-      <Form.Check 
-        type="switch"
-        id="dark-mode-switch"
-        label="Dark Mode"
-        checked={darkMode}
-        onChange={toggleDarkMode}
-      />
-      <Form.Check 
-        type="switch"
-        id="hints-switch"
-        label="Hints"
-        checked={hintsEnabled}
-        onChange={toggleHints}
-      />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: 20 }}>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center', gap: 20 }}>
+            <Switch 
+            onChange={toggleDarkMode}
+            label="Dark Mode"
+            checked={darkMode}
+            onColor="#ffa38b"
+            offHandleColor="#ffa38b"
+            offColor="#fff"
+            uncheckedIcon=""
+              checkedIcon=""
+          /> Dark Mode </div>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center', gap: 20 }}>
+      <Switch 
+          onChange={toggleHints}
+          checked={hintsEnabled}
+          onColor="#ffa38b"
+          offHandleColor="#ffa38b"
+          offColor="#fff"
+          uncheckedIcon=""
+          checkedIcon=""
+        /> Hints 
+        
+      </div></div>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onSetClick}>Close</Button>

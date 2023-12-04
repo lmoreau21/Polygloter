@@ -203,12 +203,13 @@ function EndlessMode() {
                     <HeadShake spy={round}>{hint.split(',')[0]}</HeadShake> : 
                     hint.split(',')[0]}
                   </Accordion.Header>
+                  {hintsEnabled && 
                   <Accordion.Body>
                   {index === 0 && round>=6  ? 
                      <MapChart language={currentChallenge.name}/> : 
                      ((index === 5) ? 'No Hint Available' : hint.split(',')[1])
                     }
-                </Accordion.Body>
+                </Accordion.Body>}
               
               </Accordion.Item>
             );

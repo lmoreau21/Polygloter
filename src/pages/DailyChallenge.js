@@ -33,14 +33,14 @@ function DailyChallenge() {
   const initialActiveKey = guessedLanguages.size > 0 ? (guessedLanguages.size - 1).toString() : "0";
   const [activeKeys, setActiveKeys] = useState([initialActiveKey]);
 
-  const hintsEnabled = true; // Assuming hintsEnabled is stored in localStorage
+  const hintsEnabled = localStorage.getItem('hintsEnabled') !== 'false';
   const [correctLanguage,setCorrectLanguage] = useState("");
   const [hasDone, setHasDone] = useState(false);
 
   const handleShare = () => {
     const currentDate = new Date().toLocaleDateString();
     const status = gameWon  ? 'Win 🎊': 'Failed 😢' ;
-    const text = `Polygloter 🌍 ${currentDate} - Guesses: ${round}/6, Status: ${status} Try Me: https://lmoreau21.github.io/Polygloter/`;
+    const text = `Polygloter 🌍 ${currentDate} - Guesses: ${round}/6, Status: ${status}`;
   
     if (navigator.share) {
       navigator.share({
@@ -281,7 +281,7 @@ function DailyChallenge() {
 
    
     <div className="quiz dark-mode" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: 40, alignItems: 'center', width:'100%', overflow:'hidden'}}>
-      <div className="content text-center">
+.      <div className="content text-center">
         <h1 className="display-1">{currentChallenge.phrase}</h1>
         <h3 className="mb-4">Round: {round}/6</h3>
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column-reverse', alignItems: 'center' }}>
@@ -298,13 +298,13 @@ function DailyChallenge() {
                     language}
                
               </Accordion.Header>
-             
-                <Accordion.Body>
-                  {(index === 0 && round >= 6) ? 
-                  
-                     <MapChart language={currentChallenge.name}/> :  (currentChallenge.name === language ? 'Correct!' : hint.split(',')[1])
-                    }
-                </Accordion.Body>
+              {hintsEnabled && 
+              <Accordion.Body>
+                {(index === 0 && round >= 6) ? 
+                  <MapChart language={currentChallenge.name}/> :  
+                  (currentChallenge.name === language ? 'Correct!' : (hint && typeof hint === 'string' ? hint.split(',')[1] : ''))
+                }
+              </Accordion.Body>}
               
             </Accordion.Item>
           );

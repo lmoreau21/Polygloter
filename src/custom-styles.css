@@ -57,7 +57,9 @@
   border: 2px solid transparent;
   font-family: 'Open Sans';
 }
-
+.custom-switch:checked {
+  background-color: #ffa28b7f;
+}
 .button-container .btn:hover {
   background-color: rgba(255, 255, 255, 0.6);
   border-color: #5c6799;
@@ -80,6 +82,7 @@
   width: 80%;
   color: #fff; /* White text in dark mode */
 }
+
 
 .dark-mode .button-container .btn {
   color: white; /* White text on buttons in dark mode */
@@ -122,6 +125,7 @@ body, html {
  
   /* Other styles like font-family can be here */
 }
+
 .navbar {
     padding-top: 1rem; /* Adjust spacing at the top */
   }
