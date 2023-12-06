@@ -143,6 +143,276 @@
         "name": "Romanian",
         "phrase": "Cât costă asta?",
         "englishPhrase": "How much does this cost?"
+    },
+    {
+        "name": "French",
+        "phrase": "Où est la salle de bain?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "French",
+        "phrase": "Merci beaucoup.",
+        "englishPhrase": "Thank you very much."
+    },
+    {
+        "name": "Hebrew",
+        "phrase": "איפה השירותים?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Hebrew",
+        "phrase": "תודה רבה.",
+        "englishPhrase": "Thank you very much."
+    },
+    {
+        "name": "Indonesian",
+        "phrase": "Terima kasih banyak.",
+        "englishPhrase": "Thank you very much."
+    },
+    {
+        "name": "Indonesian",
+        "phrase": "Di mana kamar mandi?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Romanian",
+        "phrase": "Cât costă asta?",
+        "englishPhrase": "How much does this cost?"
+    },
+    {
+        "name": "Romanian",
+        "phrase": "Unde este baia?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Hungarian",
+        "phrase": "Mennyibe kerül?",
+        "englishPhrase": "How much does it cost?"
+    },
+    {
+        "name": "Hungarian",
+        "phrase": "Hol van a mosdó?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Norwegian",
+        "phrase": "Hvor mye koster det?",
+        "englishPhrase": "How much does it cost?"
+    },
+    {
+        "name": "Norwegian",
+        "phrase": "Hvor er toalettet?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Danish",
+        "phrase": "Hvor meget koster det?",
+        "englishPhrase": "How much does it cost?"
+    },
+    {
+        "name": "Danish",
+        "phrase": "Hvor er toilettet?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Finnish",
+        "phrase": "Paljonko se maksaa?",
+        "englishPhrase": "How much does it cost?"
+    },
+    {
+        "name": "Finnish",
+        "phrase": "Missä on vessa?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Swedish",
+        "phrase": "Hur mycket kostar det?",
+        "englishPhrase": "How much does it cost?"
+    },
+    {
+        "name": "Swedish",
+        "phrase": "Var är toaletten?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Czech",
+        "phrase": "Kolik to stojí?",
+        "englishPhrase": "How much does it cost?"
+    },
+    {
+        "name": "Czech",
+        "phrase": "Kde je záchod?",
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Greek",
+        "phrase": "Πόσο κάνει αυτό;",
+        "englishPhrase": "How much does it cost?"
+    },
+    {
+        "name": "Greek",
+        "phrase": "Πού είναι η τουαλέτα;", 
+        "englishPhrase": "Where is the bathroom?"
+    },
+    {
+        "name": "Japanese",
+        "phrase": "今日はどうですか？",
+        "englishPhrase": "How are you doing today?"
+    },
+    {
+        "name": "Japanese",
+        "phrase": "天気がいいです。",
+        "englishPhrase": "The weather is beautiful."
+    },
+    {
+        "name": "Korean",
+        "phrase": "오늘 어떻게 지내세요?",
+        "englishPhrase": "How are you doing today?"
+    },
+    {
+        "name": "Korean",
+        "phrase": "날씨가 좋습니다.",
+        "englishPhrase": "The weather is beautiful."
+    }, 
+    {
+        "name": "Mandarin Chinese",
+        "phrase": "你今天好吗？",
+        "englishPhrase": "How are you doing today?"
+    },
+    {
+        "name": "Mandarin Chinese",
+        "phrase": "天气很好。",
+        "englishPhrase": "The weather is beautiful."
+    },
+    {
+        "name": "Vietnamese",
+        "phrase": "Bạn có khỏe không?",
+        "englishPhrase": "How are you doing today?"
+    },
+    {
+        "name": "Vietnamese",
+        "phrase": "Thời tiết đẹp.",
+        "englishPhrase": "The weather is beautiful."
+    },
+    {
+        "name": "Arabic",
+        "phrase": "كيف حالك اليوم؟",
+        "englishPhrase": "How are you doing today?"
+    },
+    {
+        "name": "Arabic",
+        "phrase": "الطقس جميل.",
+        "englishPhrase": "The weather is beautiful."
+    },
+    {
+        "name": "Hindi",
+        "phrase": "आप आज कैसे हैं?",
+        "englishPhrase": "How are you doing today?"
+    },
+    {
+        "name": "Hindi",
+        "phrase": "मौसम बहुत सुंदर है।",
+        "englishPhrase": "The weather is beautiful."
+    },
+    {
+        "name": "Portuguese",
+        "phrase": "Como você está hoje?",
+        "englishPhrase": "How are you doing today?"
+    },
+    {
+        "name": "Portuguese",
+        "phrase": "O tempo está bonito.",
+        "englishPhrase": "The weather is beautiful."
+    },
+    {
+        "name": "Thai",
+        "phrase": "คุณเป็นอย่างไรบ้างวันนี้",
+        "englishPhrase": "How are you doing today?"
+    },
+    {
+        "name": "Thai",
+        "phrase": "สภาพอากาศดี",
+        "englishPhrase": "The weather is beautiful."
+    },
+    {
+        "name": "Spanish",
+        "phrase": "Es un placer conocerte.",
+        "englishPhrase": "It is nice to meet you."
+    },
+    {
+        "name": "Spanish",
+        "phrase": "¿Qué hora es?",
+        "englishPhrase": "What time is it?"
+    },
+    {
+        "name": "Bengali",
+        "phrase": "আপনার সাথে দেখা হলে খুশি হয়।",
+        "englishPhrase": "It is nice to meet you."
+    },
+    {
+        "name": "Bengali",
+        "phrase": "এটা কটা বাজে?",
+        "englishPhrase": "What time is it?"
+    },
+    {
+        "name": "Russian",
+        "phrase": "Приятно познакомиться.",
+        "englishPhrase": "It is nice to meet you."
+    },
+    {
+        "name": "Russian",
+        "phrase": "Который час?",
+        "englishPhrase": "What time is it?"
+    },
+    {
+        "name": "Turkish",
+        "phrase": "Tanıştığıma memnun oldum.",
+        "englishPhrase": "It is nice to meet you."
+    },
+    {
+        "name": "Turkish",
+        "phrase": "Saat kaç?",
+        "englishPhrase": "What time is it?"
+    },
+    {
+        "name": "Dutch",
+        "phrase": "Leuk je te ontmoeten.",
+        "englishPhrase": "It is nice to meet you."
+    },
+    {
+        "name": "Dutch",
+        "phrase": "Hoe laat is het?",
+        "englishPhrase": "What time is it?"
+    },
+    {
+        "name": "Ukrainian",
+        "phrase": "Приємно зустрітися.",
+        "englishPhrase": "It is nice to meet you."
+    },
+    {
+        "name": "Ukrainian",
+        "phrase": "Котра година?",
+        "englishPhrase": "What time is it?"
+    },
+    {
+        "name": "Polish",
+        "phrase": "Miło cię poznać.",
+        "englishPhrase": "It is nice to meet you."
+    },
+    {
+        "name": "Polish",
+        "phrase": "Która jest godzina?",
+        "englishPhrase": "What time is it?"
+    },
+    {
+        "name": "Italian",
+        "phrase": "Piacere di conoscerti.",
+        "englishPhrase": "It is nice to meet you."
+    },
+    {
+        "name": "Italian",
+        "phrase": "Che ore sono?",
+        "englishPhrase": "What time is it?"
     }
 ]
   
