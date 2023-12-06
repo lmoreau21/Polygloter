@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Polygloter/static/css/main.22eaaab0.css",
-    "main.js": "/Polygloter/static/js/main.38faa393.js",
+    "main.js": "/Polygloter/static/js/main.21cf8fdc.js",
     "static/media/map.svg": "/Polygloter/static/media/map.0addb2af62a4e9fec979.svg",
     "index.html": "/Polygloter/index.html",
     "main.22eaaab0.css.map": "/Polygloter/static/css/main.22eaaab0.css.map",
-    "main.38faa393.js.map": "/Polygloter/static/js/main.38faa393.js.map"
+    "main.21cf8fdc.js.map": "/Polygloter/static/js/main.21cf8fdc.js.map"
   },
   "entrypoints": [
     "static/css/main.22eaaab0.css",
-    "static/js/main.38faa393.js"
+    "static/js/main.21cf8fdc.js"
   ]
 }
